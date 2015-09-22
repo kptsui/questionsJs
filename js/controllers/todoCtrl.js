@@ -110,7 +110,7 @@ $scope.$watchCollection('todos', function () {
 		// set time
 		todo.dateString = new Date(todo.timestamp).toString();
 		// set message
-		todo.tags = todo.wholeMsg.match(/#\w+/g);
+		//todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
 	});
@@ -144,6 +144,34 @@ $scope.getFirstAndRestSentence = function($string) {
 	return [head, desc];
 };
 
+// Get the # tags from msg
+// return msg without tags and tags[]
+$scope.getTags = function($string){
+	var n_string = "";
+	var tags = new Object();
+	tags = [];
+	
+	var line = $string.split("\n");	
+	for (var l in line)
+	{
+		var res = line[l].split(" ");
+		for (var i in res)
+		{
+			if (res[i].charAt(0)=="#")
+				tags.push(res[i].substr(1));
+			else
+				n_string += res[i]+" ";
+		}
+		if (n_string!="")
+			n_string += "\n";
+	}
+	if (tags.length == 0)
+		tags[0] = "...";
+	
+	
+	return [n_string, tags];
+}
+
 //****************************************
 //****************************************
 $scope.addTodo = function () {
@@ -154,6 +182,14 @@ $scope.addTodo = function () {
 		return;
 	}
 
+	var res = $scope.getTags(newTodo);
+	newTodo = res[0];
+	var tags = res[1];
+	
+	if (!newTodo.length) {
+		return;
+	}
+	
 	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
@@ -169,7 +205,7 @@ $scope.addTodo = function () {
 		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
 		completed: false,
 		timestamp: new Date().getTime(),
-		tags: "...",
+		tags: tags,
 		echo: 0,
 		order: 0,
 		views: 0
