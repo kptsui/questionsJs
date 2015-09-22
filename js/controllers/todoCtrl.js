@@ -9,6 +9,49 @@
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
+	// initialize later
+	// for each questions
+	$scope.comments = [];
+	$scope.forms = []; // for data binding, prevent input appears on all forms at the same time
+	
+	// initialize button checking variable
+	$scope.isCommentShow = false;
+	$scope.isViewShow = false;
+	
+	// button event
+	$scope.clickedComment = function(todo){
+		$scope.isCommentShow = !$scope.isCommentShow;
+	}
+	$scope.clickedView = function(todo){
+		$scope.isViewShow = !$scope.isViewShow;
+	}
+	
+	//$scope.master = {};
+	//$scope.master = angular.copy(user);
+	//$scope.user = {};
+	// after submitted form, user={name: xxx, msg: xxx}
+	
+	// function for just submitted the form
+	$scope.addComment = function(form, todo) {
+		if(form.name != "" && form.msg != ""){
+			$scope.editedTodo = todo;
+			
+			if(todo.hasOwnProperty("comments")){
+				todo.comments.push(form);
+			}
+			else{ // todo.comments[0].name = ""
+				//todo.comments[0] = form;
+				
+				// add new property to todo object
+				todo.comments = [form]; //[{}]
+			}
+			todo.views += 1;
+			$scope.todos.$save(todo);
+			form.name = "";
+			form.msg = "";
+		}
+	};
+	
 	// set local storage
 	$scope.$storage = $localStorage;
 
@@ -31,7 +74,7 @@ if (!roomId || roomId.length === 0) {
 }
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://classquestion.firebaseio.com/";
+var firebaseURL = "https://scorching-fire-5595.firebaseio.com/";
 
 
 $scope.roomId = roomId;
@@ -41,21 +84,34 @@ var echoRef = new Firebase(url);
 var query = echoRef.orderByChild("order");
 // Should we limit?
 //.limitToFirst(1000);
-$scope.todos = $firebaseArray(query);
+$scope.todos = $firebaseArray(query); // put json data into array
 
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
 
 // pre-precessing for collection
+//******************
+// todo in todos
+//******************
 $scope.$watchCollection('todos', function () {
 	var total = 0;
 	var remaining = 0;
-	$scope.todos.forEach(function (todo) {
+	$scope.todos.forEach(function (todo) { // json data alread put into array on line44
 		// Skip invalid entries so they don't break the entire app.
 		if (!todo || !todo.head ) {
 			return;
 		}
-
+		//***********************************
+		//***********************************
+		// new added
+		if(todo.hasOwnProperty("comments")){
+			$scope.comments.push(todo.comments);//$scope.comments[0][0].name
+		}
+		// form for each questions
+		$scope.forms.push({name: "", msg: ""});
+		
+		//***********************************
+		//***********************************
 		total++;
 		if (todo.completed === false) {
 			remaining++;
@@ -63,6 +119,7 @@ $scope.$watchCollection('todos', function () {
 
 		// set time
 		todo.dateString = new Date(todo.timestamp).toString();
+		// set message
 		todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
@@ -97,6 +154,8 @@ $scope.getFirstAndRestSentence = function($string) {
 	return [head, desc];
 };
 
+//****************************************
+//****************************************
 $scope.addTodo = function () {
 	var newTodo = $scope.input.wholeMsg.trim();
 
@@ -109,6 +168,9 @@ $scope.addTodo = function () {
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
 
+	//****************************************
+	//****************************************
+	//****************************************
 	$scope.todos.$add({
 		wholeMsg: newTodo,
 		head: head,
@@ -119,7 +181,9 @@ $scope.addTodo = function () {
 		timestamp: new Date().getTime(),
 		tags: "...",
 		echo: 0,
-		order: 0
+		order: 0,
+		views: 0
+		//comments: [{name: "", msg : ""}]
 	});
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
@@ -130,6 +194,7 @@ $scope.editTodo = function (todo) {
 	$scope.originalTodo = angular.extend({}, $scope.editedTodo);
 };
 
+// Like button
 $scope.addEcho = function (todo) {
 	$scope.editedTodo = todo;
 	todo.echo = todo.echo + 1;
@@ -140,6 +205,19 @@ $scope.addEcho = function (todo) {
 	// Disable the button
 	$scope.$storage[todo.$id] = "echoed";
 };
+
+// Dislike button
+$scope.minusEcho = function (todo) {
+	$scope.editedTodo = todo;
+	todo.echo = todo.echo -1;
+	// Hack to order using this order.
+	todo.order = todo.order +1;
+	$scope.todos.$save(todo);
+
+	// Disable the button
+	$scope.$storage[todo.$id] = "echoed";
+};
+
 
 $scope.doneEditing = function (todo) {
 	$scope.editedTodo = null;

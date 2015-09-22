@@ -51,14 +51,16 @@
 <textarea type="text" id="new-todo" class="form-control"
 placeholder="Search or Post Question"
 ng-model="input.wholeMsg" autofocus></textarea>
+
 <span class="input-group-btn">
-	<button class="btn btn-default" type="button" ng-click="addTodo()">Ask</button>
+	<button class="btn btn-danger" type="button" ng-click="addTodo()">Ask</button>
 </span>
+
 </div><!-- /input-group -->
 
 
 <div class="list-group" id="todo-list">
-	<span class="list-group-item" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+	<span class="list-group-item" ng-init="isCommentShow=false;isViewShow=false;" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
 		<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
 			<span class="label label-danger" ng-show="todo.new">New</span>
 			<span class="badge">{{todo.echo}}</span>
@@ -70,8 +72,37 @@ ng-model="input.wholeMsg" autofocus></textarea>
 		<p class="list-group-item-text"><span ng-bind-html="todo.trustedDesc"></span> created: {{todo.dateString}}
 			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
 
-			<button class="btn btn-default btn-xs glyphicon glyphicon-hand-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
+		<button class="btn btn-default btn-xs glyphicon glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
+
+		<button class="btn btn-default btn-xs glyphicon glyphicon glyphicon-thumbs-down" ng-click="minusEcho(todo)" ng-disabled="$storage[todo.$id]">Dislike</button>
+		
+		<button class="btn btn-default btn-xs glyphicon glyphicon-comment" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
+		
+		<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" ng-click="isCommentShow=!isCommentShow">Comment</button>
+			
+
+			
+		<div ng-show="isCommentShow" ng-init="form=forms[$index]">
+			<br>
+			<form novalidate role="form">
+				<input type="text" ng-model="form.name" placeholder="Name" class="form-control input-sm"/>
+				<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
+		   
+				<input type="submit" ng-click="addComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
+			</form>
+		</div>
+			
+
+		<div class="container" ng-repeat="comment in todo.comments" ng-show="isViewShow">
+			<hr>
+			<div>
+				<p>{{ comment.name }}: {{ comment.msg }}</p>
+			</div>
+		</div>
+
+
 			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
+
 			&nbsp;
 			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
 		</span>
