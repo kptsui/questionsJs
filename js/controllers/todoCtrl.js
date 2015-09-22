@@ -14,17 +14,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	$scope.comments = [];
 	$scope.forms = []; // for data binding, prevent input appears on all forms at the same time
 	
-	// initialize button checking variable
-	$scope.isCommentShow = false;
-	$scope.isViewShow = false;
-	
-	// button event
-	$scope.clickedComment = function(todo){
-		$scope.isCommentShow = !$scope.isCommentShow;
-	}
-	$scope.clickedView = function(todo){
-		$scope.isViewShow = !$scope.isViewShow;
-	}
+
 	
 	//$scope.master = {};
 	//$scope.master = angular.copy(user);
@@ -35,7 +25,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	$scope.addComment = function(form, todo) {
 		if(form.name != "" && form.msg != ""){
 			$scope.editedTodo = todo;
-			
+
 			if(todo.hasOwnProperty("comments")){
 				todo.comments.push(form);
 			}
@@ -74,7 +64,7 @@ if (!roomId || roomId.length === 0) {
 }
 
 // TODO: Please change this URL for your app
-var firebaseURL = "https://scorching-fire-5595.firebaseio.com/";
+var firebaseURL = "https://intense-torch-3848.firebaseio.com/";
 
 
 $scope.roomId = roomId;

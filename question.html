@@ -60,7 +60,13 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 
 <div class="list-group" id="todo-list">
-	<span class="list-group-item" ng-init="isCommentShow=false;isViewShow=false;" ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+	<span
+		class="list-group-item"
+		ng-init="isCommentShow=false; isViewShow=false;"
+		ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
+		ng-class="{completed: todo.completed, editing: todo == editedTodo}"
+		>
+
 		<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
 			<span class="label label-danger" ng-show="todo.new">New</span>
 			<span class="badge">{{todo.echo}}</span>
@@ -69,8 +75,11 @@ ng-model="input.wholeMsg" autofocus></textarea>
 			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 		</h4>
-		<p class="list-group-item-text"><span ng-bind-html="todo.trustedDesc"></span> created: {{todo.dateString}}
-			<span ng-show="todo.tags">tags: {{todo.tags}}</span></p>
+
+		<p class="list-group-item-text">
+			<span ng-bind-html="todo.trustedDesc"></span> created: {{todo.dateString}}
+			<span ng-show="todo.tags">tags: {{todo.tags}}</span>
+		</p>
 
 		<button class="btn btn-default btn-xs glyphicon glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
 
@@ -105,8 +114,8 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 			&nbsp;
 			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-		</span>
-	</div>
+		
+</div>
 
 	<!--
 
