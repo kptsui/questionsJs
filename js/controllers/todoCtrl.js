@@ -20,37 +20,6 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	//$scope.master = angular.copy(user);
 	//$scope.user = {};
 	// after submitted form, user={name: xxx, msg: xxx}
-	
-	// function for just submitted the form
-	$scope.addComment = function(form, todo) {
-		if(form.msg != ""){
-			$scope.editedTodo = todo;
-
-			form.name = $scope.userName;
-
-			if(todo.hasOwnProperty("comments")){
-				todo.comments.push(form);
-			}
-			else{ // todo.comments[0].name = ""
-				//todo.comments[0] = form;
-				
-				// add new property to todo object
-				todo.comments = [form]; //[{}]
-			}
-			todo.views += 1;
-			$scope.todos.$save(todo);
-			//form.name = "";
-			form.msg = "";
-
-			return false; // let comment input ng-show = false
-		}
-	};
-	
-	$scope.signUp = function(){
-		return false;
-		//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
-		//$scope.$apply();
-	};
 
 	// set local storage
 	$scope.$storage = $localStorage;
@@ -191,6 +160,37 @@ $scope.$watchCollection('todos', function () {
 	$scope.allChecked = remaining === 0;
 	$scope.absurl = $location.absUrl();
 }, true);
+
+// function for just submitted the form
+$scope.addComment = function(form, todo) {
+	if(form.msg != ""){
+		$scope.editedTodo = todo;
+
+		form.name = $scope.userName;
+
+		if(todo.hasOwnProperty("comments")){
+			todo.comments.push(form);
+		}
+		else{ // todo.comments[0].name = ""
+			//todo.comments[0] = form;
+			
+			// add new property to todo object
+			todo.comments = [form]; //[{}]
+		}
+		todo.views += 1;
+		$scope.todos.$save(todo);
+		//form.name = "";
+		form.msg = "";
+
+		return false; // let comment input ng-show = false
+	}
+};
+
+$scope.signUp = function(){
+	return false;
+	//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
+	//$scope.$apply();
+};
 
 // Get the first sentence and rest
 $scope.getFirstAndRestSentence = function($string) {
