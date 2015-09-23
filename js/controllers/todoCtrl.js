@@ -14,7 +14,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	$scope.comments = [];
 	$scope.forms = []; // for data binding, prevent input appears on all forms at the same time
 	
-
+	var noFB = true;
 	
 	//$scope.master = {};
 	//$scope.master = angular.copy(user);
@@ -285,24 +285,33 @@ $scope.markAll = function (allCompleted) {
 };
 
 $scope.FBLogin = function () {
-	var ref = new Firebase(firebaseURL);
-	ref.authWithOAuthPopup("facebook", function(error, authData) {
-		if (error) {
-			console.log("Login Failed!", error);
-		} else {
-			$scope.$apply(function() {
-				$scope.$authData = authData;
-				$scope.isAdmin = true;
-			});
-			console.log("Authenticated successfully with payload:", authData);
-		}
-	});
+	if (!noFB)
+	{
+		var ref = new Firebase(firebaseURL);
+		ref.authWithOAuthPopup("facebook", function(error, authData) {
+			if (error) {
+				console.log("Login Failed!", error);
+			} else {
+				$scope.$apply(function() {
+					$scope.$authData = authData;
+					$scope.isAdmin = true;
+				});
+				console.log("Authenticated successfully with payload:", authData);
+			}
+		});
+	}
+	else
+		$scope.isAdmin = true;
+	
 };
 
 $scope.FBLogout = function () {
-	var ref = new Firebase(firebaseURL);
-	ref.unauth();
-	delete $scope.$authData;
+	if (!noFB)
+	{
+		var ref = new Firebase(firebaseURL);
+		ref.unauth();
+		delete $scope.$authData;
+	}
 	$scope.isAdmin = false;
 };
 
