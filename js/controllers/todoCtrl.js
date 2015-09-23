@@ -240,9 +240,10 @@ $scope.getTags = function($string){
 		if (n_string!="")
 			n_string += "\n";
 	}
+	/*
 	if (tags.length == 0)
 		tags[0] = "...";
-	
+	*/
 	
 	return [n_string, tags];
 }
