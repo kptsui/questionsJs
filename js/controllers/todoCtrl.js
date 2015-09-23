@@ -39,14 +39,14 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 			}
 			todo.views += 1;
 			$scope.todos.$save(todo);
-			form.name = "";
+			//form.name = "";
 			form.msg = "";
 
 			return false; // let comment input ng-show = false
 		}
 	};
 	
-	$scope.signUp = function(username){
+	$scope.signUp = function(){
 		return false;
 		//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
 		//$scope.$apply();
