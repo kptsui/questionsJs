@@ -97,32 +97,55 @@ function FormatNumberLength(num, length) {
     return r;
 }
 
-$scope.dateConverter = function(res_date){
-	var monthNames = [
+function dateConverter(res_date, now){
+var monthNames = [
   "January", "February", "March",
   "April", "May", "June", "July",
   "August", "September", "October",
   "November", "December"
 ];
-
 var date = res_date;
 var day = date.getDate();
-var monthIndex = date.getMonth();
+var month = date.getMonth();
 var year = date.getFullYear();
-var year = year.toString().substr(2);
-
-//console.log(day, monthNames[monthIndex], year);
-//return(day + ' ' + monthNames[monthIndex] + ' ' + year);
-return(FormatNumberLength(day,2) + '/' + FormatNumberLength(monthIndex,2) + '/' + FormatNumberLength(year,2));
+if (year == now.getFullYear())
+	return(day + ' ' + monthNames[month]);
+else
+	return(day + ' ' + monthNames[month] + ' ' + year);
 }
 
-$scope.timeConverter = function(res_date){
+function timeConverter(res_date){
 var date = res_date;
 var hours = date.getHours();
 var minutes = date.getMinutes();
 var seconds = date.getSeconds();
 
-return(FormatNumberLength(hours,2) + ':' + FormatNumberLength(minutes,2) + ':' + FormatNumberLength(seconds,2));
+return(FormatNumberLength(hours,2) + ':' + FormatNumberLength(minutes,2));
+}
+
+// beauty print time
+function timeInterpreter(res_date){
+	var output = "";
+	var now = new Date();
+	if (res_date > now.getTime())
+		output = "Time traveller! - " + dateConverter(res_date, now) + " at " + timeConverter(res_date);
+	else if (res_date > now.getTime() - 60 * 1000) // 1 min
+	{
+		output = Math.round((now-res_date)/1000);
+		if (output == 0)
+			output = "just posted";
+		else
+			output += " s";
+	}
+	else if (res_date > now.getTime() - 60 * 60 * 1000) // 1 hour
+		output = Math.round((now-res_date)/(60000)) + " mins"
+	else if (res_date > now.getTime() - 24 * 60 * 60 * 1000) // 1 day
+		output = Math.round((now-res_date)/(3600000)) + " hrs"
+	else if (res_date.getMonth() == now.getMonth())
+		output = dateConverter(res_date, now) + " at " + timeConverter(res_date);
+	else
+		output = dateConverter(res_date, now);
+	return output;
 }
 
 // pre-precessing for collection
@@ -155,7 +178,7 @@ $scope.$watchCollection('todos', function () {
 
 		// set time
 		//todo.dateString = new Date(todo.timestamp).toString();
-		todo.dateString = $scope.timeConverter(new Date(todo.timestamp)) + ", " + $scope.dateConverter(new Date(todo.timestamp));
+		todo.dateString = timeInterpreter(new Date(todo.timestamp));
 		// set message
 		//todo.tags = todo.wholeMsg.match(/#\w+/g);
 
