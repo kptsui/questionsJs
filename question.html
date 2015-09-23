@@ -24,58 +24,61 @@
 
 </head>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <body ng-controller="TodoCtrl" class="body">
 	<nav class="navbar navbar-default navbar-fixed-top">
-	  <div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  <a class="navbar-brand" href="#">Question Room: {{roomId}}</a>
-		</div>
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="#">Question Room: {{roomId}}</a>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		
-		  <div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
-			<form class="navbar-form navbar-header" novalidate role="form">
-				
-				<label>Tell me who you are: </label> 
-				<input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
-				
-				<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
-				class="btn btn-default" />
-			</form>
-		  </div>
-		  
-			<div ng-show="!isSignUpFormShow" class="navbar-header">
-			<ul  class="nav navbar-nav navbar-right">
-			<li>
-				<a >Nice to meet you! <strong>{{ userName }}</strong></a>
-				</li>
-			</ul>
 			</div>
-		  
-		  <ul class="nav navbar-nav navbar-right">
-			<li><a  href="./index.html">Main</a></li>
-			<li>
-			<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
-			</li>
-			<!-- after login -->
-			<li>
-			<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
-			{{$authData.facebook.displayName}}
-			</li>
-			<li>
-			<button ng-show="$authData" type="button" class="btn btn-default navbar-btn" ng-click="FBLogout()">Logout</button>
-			</li>
-		  </ul>
-		</div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			
+				<div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
+					<form class="navbar-form navbar-header" novalidate role="form">
+						
+						<label>Tell me who you are: </label> 
+						<input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
+						
+						<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
+						class="btn btn-default" />
+					</form>
+				</div>
+			  
+				<div ng-show="!isSignUpFormShow" class="navbar-header">
+				<ul  class="nav navbar-nav navbar-right">
+					<li>
+						<a >Nice to meet you! <strong>{{ userName }}</strong></a>
+						</li>
+					</ul>
+				</div>
+			  
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a  href="./index.html">Main</a></li>
+					<li>
+						<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
+					</li>
+					<!-- after login -->
+					<li>
+						<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
+					{{$authData.facebook.displayName}}
+					</li>
+					<li>
+						<button ng-show="$authData" type="button" class="btn btn-default navbar-btn" ng-click="FBLogout()">Logout</button>
+					</li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
 	</nav>
 
 	<div class="container">
@@ -120,16 +123,13 @@
 
 
 <div class="inputBox" >
-	<!--
-	<form id="todo-form" ng-submit="addTodo()">
--->
-<textarea type="text" id="new-todo" class="form-control "
-placeholder="Search or Post Question"
-ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
-<button class="btnAsk" ng-click="addTodo()">Ask</button>
-
+	<textarea type="text" id="new-todo" class="form-control "
+	placeholder="Search or Post Question"
+	ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
+	<button class="btnAsk" ng-click="addTodo()">Ask</button>
 </div><!-- /input-group -->
 
+<br><br>
 
 <div class="list-group" id="todo-list">
 	<div
@@ -148,7 +148,7 @@ ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
 					<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 					<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 					
-					<small class="stringTime">{{todo.dateString}}</small>
+					<small class="stringTime">{{todo.dateString}} ago by {{todo.op}}</small>
 				</h4>
 
 				<p class="list-group-item-text content" style="margin:3px 0">
@@ -181,7 +181,8 @@ ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
 		</div>
 		<div ng-show="isViewShow">
 			<div class="container" style="padding:0 20px" ng-repeat="comment in todo.comments" >
-				<p>{{ comment.name }}: {{ comment.msg }}</p>
+				<p>{{ comment.name }}: {{ comment.msg }} <small style="padding-left:10px">{{ comment.dateString }}</small></p>
+				
 			</div>
 		</div>
 

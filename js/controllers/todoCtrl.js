@@ -11,8 +11,8 @@ todomvc.controller('TodoCtrl',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	
 	if(localStorage.getItem("userNameInQJS")){
-		$scope.isSignUpFormShow = false;
 		$scope.userName = localStorage.getItem("userNameInQJS");
+		$scope.isSignUpFormShow = false;
 	}
 	else{
 		$scope.isSignUpFormShow = true;
@@ -177,6 +177,10 @@ $scope.addComment = function(form, todo) {
 
 		form.name = $scope.userName;
 
+		var date = new Date();
+		var time = date.getHours() + ":" + date.getMinutes() + " " + date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
+		form.dateString = time;
+
 		if(todo.hasOwnProperty("comments")){
 			todo.comments.push(form);
 		}
@@ -295,7 +299,8 @@ $scope.addTodo = function () {
 		echo: 0,
 		d_echo: 0,
 		order: 0,
-		views: 0
+		views: 0,
+		op: $scope.userName
 		//comments: [{name: "", msg : ""}]
 	});
 	// remove the posted question in the input
