@@ -23,6 +23,32 @@
 
 </head>
 <body ng-controller="TodoCtrl">
+<!--
+	<form 
+		novalidate class="simple-form" 
+		ng-init="isSignUpFormShow=true;" 
+		ng-show="isSignUpFormShow"
+		>
+	    Name: <input type="text" ng-model="userName" />
+
+	    <input type="submit" ng-click="isSignUpFormShow=signUp(userName);" value="Sign" />
+	</form>
+-->
+
+	<div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
+		<br>
+		<form novalidate role="form">
+			Sign up to comment! <input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
+	   		
+			<input type="submit" ng-click="isSignUpFormShow=signUp(userName);" value="Sign" 
+			class="btn btn-info btn-sm" />
+		</form>
+	</div>
+
+	<div ng-show="!isSignUpFormShow">
+		<p>Login: {{ userName }}</p>
+	</div>
+
 	<font size="10">Questions for {{roomId}}?</font>&nbsp;
 
 	<!--
@@ -87,17 +113,17 @@ ng-model="input.wholeMsg" autofocus></textarea>
 		
 		<button class="btn btn-default btn-xs glyphicon glyphicon-comment" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
 		
-		<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" ng-click="isCommentShow=!isCommentShow">Comment</button>
+		<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">Comment</button>
 			
 
 			
 		<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 			<br>
 			<form novalidate role="form">
-				<input type="text" ng-model="form.name" placeholder="Name" class="form-control input-sm"/>
+
 				<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
 		   
-				<input type="submit" ng-click="addComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
+				<input type="submit" ng-click="isCommentShow = aaddComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
 			</form>
 		</div>
 			
