@@ -11,8 +11,8 @@ todomvc.controller('TodoCtrl',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	
 	if(localStorage.getItem("userNameInQJS")){
-		$scope.isSignUpFormShow = false;
 		$scope.userName = localStorage.getItem("userNameInQJS");
+		$scope.isSignUpFormShow = false;
 	}
 	else{
 		$scope.isSignUpFormShow = true;
@@ -176,6 +176,10 @@ $scope.addComment = function(form, todo) {
 		$scope.editedTodo = todo;
 
 		form.name = $scope.userName;
+
+		var date = new Date();
+		var time = date.getHours() + ":" + date.getMinutes() + " " + date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
+		form.dateString = time;
 
 		if(todo.hasOwnProperty("comments")){
 			todo.comments.push(form);
