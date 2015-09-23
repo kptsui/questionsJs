@@ -89,6 +89,42 @@ $scope.todos = $firebaseArray(query); // put json data into array
 //$scope.input.wholeMsg = '';
 $scope.editedTodo = null;
 
+function FormatNumberLength(num, length) {
+    var r = "" + num;
+    while (r.length < length) {
+        r = "0" + r;
+    }
+    return r;
+}
+
+$scope.dateConverter = function(res_date){
+	var monthNames = [
+  "January", "February", "March",
+  "April", "May", "June", "July",
+  "August", "September", "October",
+  "November", "December"
+];
+
+var date = res_date;
+var day = date.getDate();
+var monthIndex = date.getMonth();
+var year = date.getFullYear();
+var year = year.toString().substr(2);
+
+//console.log(day, monthNames[monthIndex], year);
+//return(day + ' ' + monthNames[monthIndex] + ' ' + year);
+return(FormatNumberLength(day,2) + '/' + FormatNumberLength(monthIndex,2) + '/' + FormatNumberLength(year,2));
+}
+
+$scope.timeConverter = function(res_date){
+var date = res_date;
+var hours = date.getHours();
+var minutes = date.getMinutes();
+var seconds = date.getSeconds();
+
+return(FormatNumberLength(hours,2) + ':' + FormatNumberLength(minutes,2) + ':' + FormatNumberLength(seconds,2));
+}
+
 // pre-precessing for collection
 //******************
 // todo in todos
@@ -118,7 +154,8 @@ $scope.$watchCollection('todos', function () {
 		}
 
 		// set time
-		todo.dateString = new Date(todo.timestamp).toString();
+		//todo.dateString = new Date(todo.timestamp).toString();
+		todo.dateString = $scope.timeConverter(new Date(todo.timestamp)) + ", " + $scope.dateConverter(new Date(todo.timestamp));
 		// set message
 		//todo.tags = todo.wholeMsg.match(/#\w+/g);
 
@@ -153,6 +190,11 @@ $scope.getFirstAndRestSentence = function($string) {
 	}
 	return [head, desc];
 };
+
+// update msg string to tag string for quick tag search
+$scope.tagToMsg = function($tag) {
+	$scope.input = {wholeMsg: $tag};
+}
 
 // Get the # tags from msg
 // return msg without tags and tags[]
@@ -193,14 +235,14 @@ $scope.addTodo = function () {
 	}
 
 	var res = $scope.getTags(newTodo);
-	newTodo = res[0];
+	var newTodo_nt = res[0];
 	var tags = res[1];
 	
 	if (!newTodo.length) {
 		return;
 	}
 	
-	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
+	var firstAndLast = $scope.getFirstAndRestSentence(newTodo_nt);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
 
