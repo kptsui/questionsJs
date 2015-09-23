@@ -152,14 +152,14 @@
 					<small class="stringTime">{{todo.dateString}} ago by {{todo.op}}</small>
 				</h4>
 
-				<p class="list-group-item-text content" style="margin:3px 0">
-					<span ng-bind-html="todo.trustedDesc"></span>
-				</p>
-				<p>
+				
+					<p ng-show="todo.trustedDesc" style="padding-left:10px">{{todo.trustedDesc}}</p>
+				
+
 					<span ng-show="todo.tags" ng-repeat="tag in todo.tags">
 					<button class="badge" style="background-color:#40BEB5;padding:3px 7px;margin:0 3px; border:0" ng-click="tagToMsg(tag)">{{tag}}</button>
 					</span>
-				</p>
+
 			</div>
 			<div>
 				<button type="button" class="btn glyphicon glyphicon glyphicon-thumbs-up btnNav"  ng-click="addEcho(todo)">like{{todo.echo}}</button>
