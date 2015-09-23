@@ -295,7 +295,8 @@ $scope.addTodo = function () {
 		echo: 0,
 		d_echo: 0,
 		order: 0,
-		views: 0
+		views: 0,
+		op: $scope.userName
 		//comments: [{name: "", msg : ""}]
 	});
 	// remove the posted question in the input

@@ -121,17 +121,18 @@
 -->
 
 
-<div class="input-group" style="margin-top:80px">
+<div class="input-group" style="margin-top:80px" ng-show="!isSignUpFormShow">
 	<!--
 	<form id="todo-form" ng-submit="addTodo()">
 -->
 <textarea type="text" id="new-todo" class="form-control"
 placeholder="Search or Post Question"
 ng-model="input.wholeMsg" style="height:100px;" autofocus></textarea>
-<span class="input-group-addon btn btn-default"  type="button" ng-click="addTodo()">Send</span>
+<span class="input-group-addon btn btn-info"  type="button" ng-click="addTodo()">Post</span>
 
 </div><!-- /input-group -->
 
+<br><br>
 
 <div class="list-group" id="todo-list">
 	<div
@@ -149,7 +150,7 @@ ng-model="input.wholeMsg" style="height:100px;" autofocus></textarea>
 			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
 			
-			<small style="margin: 0 5px">{{todo.dateString}}</small>
+			<small style="margin: 0 5px">{{todo.dateString}} ago by {{todo.op}}</small>
 		</h4>
 
 		<p class="list-group-item-text content" style="margin:3px 0">
@@ -186,7 +187,7 @@ ng-model="input.wholeMsg" style="height:100px;" autofocus></textarea>
 
 				<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
 		   
-				<input type="submit" ng-click="isCommentShow = addComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
+				<input type="submit" ng-click="isCommentShow = addComment(form, todo); isViewShow=!isCommentShow" class="btn btn-info btn-sm" value="submit" />
 			</form>
 		</div>
 			
