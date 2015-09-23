@@ -13,7 +13,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	// for each questions
 	$scope.comments = [];
 	$scope.forms = []; // for data binding, prevent input appears on all forms at the same time
-	
+
 	var noFB = true;
 	
 	//$scope.master = {};
@@ -23,8 +23,10 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	
 	// function for just submitted the form
 	$scope.addComment = function(form, todo) {
-		if(form.name != "" && form.msg != ""){
+		if(form.msg != ""){
 			$scope.editedTodo = todo;
+
+			form.name = $scope.userName;
 
 			if(todo.hasOwnProperty("comments")){
 				todo.comments.push(form);
@@ -39,9 +41,17 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 			$scope.todos.$save(todo);
 			form.name = "";
 			form.msg = "";
+
+			return false; // let comment input ng-show = false
 		}
 	};
 	
+	$scope.signUp = function(username){
+		return false;
+		//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
+		//$scope.$apply();
+	};
+
 	// set local storage
 	$scope.$storage = $localStorage;
 
