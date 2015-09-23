@@ -14,7 +14,7 @@
 	<meta http-equiv="pragma" content="no-cache" />
 
 	<title>Question Room: {{roomId}}</title>
-
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
@@ -22,9 +22,72 @@
 	<link rel="stylesheet" href="main.css">
 
 </head>
+<<<<<<< HEAD
+<body ng-controller="TodoCtrl" style="background-color:#eee">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Question Room: {{roomId}}</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	
+	  <div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
+		<form class="navbar-form navbar-header" novalidate role="form">
+			
+			<label>Tell me who you are: </label> 
+			<input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
+	   		
+			<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
+			class="btn btn-default" />
+		</form>
+	  </div>
+	  
+		<div ng-show="!isSignUpFormShow" class="navbar-header">
+		<ul  class="nav navbar-nav navbar-right">
+		<li>
+			<a >Nice to meet you! <strong>{{ userName }}</strong></a>
+			</li>
+		</ul>
+		</div>
+	  
+      <ul class="nav navbar-nav navbar-right">
+        <li><a  href="./index.html">Main</a></li>
+		<li>
+		<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
+		</li>
+		<!-- after login -->
+		<li>
+		<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
+		{{$authData.facebook.displayName}}
+		</li>
+		<li>
+		<button ng-show="$authData" type="button" class="btn btn-default navbar-btn" ng-click="FBLogout()">Logout</button>
+		</li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+
+
+<div class="container">
+<!--
+	<div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
+=======
 <body ng-controller="TodoCtrl">
 
 	<div  ng-show="isSignUpFormShow">
+>>>>>>> 701ecc4fc4c19124938333485e9f0475dddc79ea
 		<br>
 		<form novalidate role="form">
 			Sign up to comment! <input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
@@ -39,7 +102,7 @@
 	</div>
 
 	<font size="10">Questions for {{roomId}}?</font>&nbsp;
-
+-->
 	<!--
 
 	<a ng-class="{selected: location.path() == '/newechos'}" class="btn btn-primary" href="#/newechos">New Echos</a>
@@ -47,36 +110,33 @@
 	<a ng-class="{selected: location.path() == '/users'}" class="btn btn-info" href="#/users">Users</a>
 	<a ng-class="{selected: location.path() == '/about'}" class="btn btn-warning" href="#/about">About</a>
 -->
-
-<small>Share room url: {{absurl}}</small> &nbsp;
+<!--
 <a class="btn btn-default" href="/index.html">Main</a>
 <button ng-hide="$authData" class="btn btn-primary left" type="button" ng-click="FBLogin()">Want Admin? Sign in with Facebook</button>
 
-<!-- after login -->
+
 <img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
 {{$authData.facebook.displayName}}
 <button ng-show="$authData" class="btn btn-primary left" type="button" ng-click="FBLogout()">Logout</button>
+-->
 
 
-
-<div class="input-group">
+<div class="input-group" style="margin-top:80px">
 	<!--
 	<form id="todo-form" ng-submit="addTodo()">
 -->
 <textarea type="text" id="new-todo" class="form-control"
 placeholder="Search or Post Question"
-ng-model="input.wholeMsg" autofocus></textarea>
-
-<span class="input-group-btn">
-	<button class="btn btn-danger" type="button" ng-click="addTodo()">Ask</button>
-</span>
+ng-model="input.wholeMsg" style="height:100px;" autofocus></textarea>
+<span class="input-group-addon btn btn-default"  type="button" ng-click="addTodo()">Send</span>
 
 </div><!-- /input-group -->
 
 
 <div class="list-group" id="todo-list">
-	<span
+	<div
 		class="list-group-item"
+		style="margin:10px 0;"
 		ng-init="isCommentShow=false; isViewShow=false;"
 		ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
 		ng-class="{completed: todo.completed, editing: todo == editedTodo}"
@@ -84,31 +144,41 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 		<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
 			<span class="label label-danger" ng-show="todo.new">New</span>
-			<span class="badge">{{todo.echo}}</span>
 			<!-- switch -->
 			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
 			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
+			
+			<small style="margin: 0 5px">{{todo.dateString}}</small>
 		</h4>
 
-		<p class="list-group-item-text">
-			<strong><span ng-bind-html="todo.trustedDesc"></span></strong>
-			<span class="pull-right">
+		<p class="list-group-item-text content" style="margin:3px 0">
+			<span ng-bind-html="todo.trustedDesc"></span>
+		</p>
+		<p>
 			<span ng-show="todo.tags" ng-repeat="tag in todo.tags">
 			<button class="badge" style="background-color:#40BEB5;padding:3px 7px;margin:0 3px; border:0" ng-click="tagToMsg(tag)">{{tag}}</button>
 			</span>
-			 {{todo.dateString}}</span>
 		</p>
-
-		<button class="btn btn-default btn-xs glyphicon glyphicon glyphicon-thumbs-up" ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">Like</button>
-
-		<button class="btn btn-default btn-xs glyphicon glyphicon glyphicon-thumbs-down" ng-click="minusEcho(todo)" ng-disabled="$storage[todo.$id]">Dislike</button>
 		
-		<button class="btn btn-default btn-xs glyphicon glyphicon-comment" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
-		
-		<button class="btn btn-default btn-xs glyphicon glyphicon-pencil" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">Comment</button>
-			
-
+		<div style="height:10px">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+			<li>
+			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon glyphicon-thumbs-up" style="width:80px"  ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">like{{todo.echo}}</button>
+			</li>
+			<li>
+			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon glyphicon-thumbs-down" style="width:80px" ng-click="minusEcho(todo)" ng-disabled="$storage[todo.$id]">dislike{{todo.d_echo}}</button>
+			</li>
+			<li>
+			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon-comment" style="width:80px" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
+			</li>
+			<li>
+			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon-pencil" style="width:80px" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">Comment</button>
+			</li>
+			</ul>		
+		</div>
+		</div>
 			
 		<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 			<br>
@@ -137,9 +207,9 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 			&nbsp;
 			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
-		
+	</div>	
 </div>
-
+</div>
 	<!--
 
 	<div id="toTop" class="btn btn-info"><span class="fa fa-arrow-up">Back to Top</span></div>
@@ -153,7 +223,11 @@ ng-model="input.wholeMsg" autofocus></textarea>
 
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
 <script src="js/lib/Autolinker.min.js"></script>
-
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+	
 <!-- 2.2.2 -->
 <script src="js/lib/firebase.js"></script>
 <script src="js/lib/angular.min.js"></script>
