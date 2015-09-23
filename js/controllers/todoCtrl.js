@@ -283,6 +283,7 @@ $scope.addTodo = function () {
 		timestamp: new Date().getTime(),
 		tags: tags,
 		echo: 0,
+		d_echo: 0,
 		order: 0,
 		views: 0
 		//comments: [{name: "", msg : ""}]
@@ -305,19 +306,19 @@ $scope.addEcho = function (todo) {
 	$scope.todos.$save(todo);
 
 	// Disable the button
-	$scope.$storage[todo.$id] = "echoed";
+	//$scope.$storage[todo.$id] = "echoed";
 };
 
 // Dislike button
 $scope.minusEcho = function (todo) {
 	$scope.editedTodo = todo;
-	todo.echo = todo.echo -1;
+	todo.d_echo = todo.d_echo +1;
 	// Hack to order using this order.
 	todo.order = todo.order +1;
 	$scope.todos.$save(todo);
 
 	// Disable the button
-	$scope.$storage[todo.$id] = "echoed";
+	//$scope.$storage[todo.$id] = "echoed";
 };
 
 
