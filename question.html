@@ -138,15 +138,16 @@
 		ng-init="isCommentShow=false; isViewShow=false;"
 		ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
 		ng-class="{completed: todo.completed, editing: todo == editedTodo}"
+		 ng-style="{'background-color' : todo.bgColor }"
 		>
 		<div class="questionBlock">
 			<div class="questionContent">
-				<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-					<span class="label label-danger" ng-show="todo.new">New</span>
+				<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar" ng-style="{'color' : todo.textColor }">
+					
 					<!-- switch -->
 					<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
 					<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-					<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
+					<span ng-class="{completed: todo.completed}"><strong>{{todo.head}}</strong></span>
 					
 					<small class="stringTime">{{todo.dateString}} ago by {{todo.op}}</small>
 				</h4>
