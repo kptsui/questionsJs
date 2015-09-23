@@ -144,6 +144,11 @@ $scope.getFirstAndRestSentence = function($string) {
 	return [head, desc];
 };
 
+// update msg string to tag string for quick tag search
+$scope.tagToMsg = function($tag) {
+	$scope.input = {wholeMsg: $tag};
+}
+
 // Get the # tags from msg
 // return msg without tags and tags[]
 $scope.getTags = function($string){
