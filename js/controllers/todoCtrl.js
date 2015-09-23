@@ -9,6 +9,15 @@
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
+	
+	if(localStorage.getItem("userNameInQJS")){
+		$scope.isSignUpFormShow = false;
+		$scope.userName = localStorage.getItem("userNameInQJS");
+	}
+	else{
+		$scope.isSignUpFormShow = true;
+	}
+
 	// initialize later
 	// for each questions
 	$scope.comments = [];
@@ -187,6 +196,7 @@ $scope.addComment = function(form, todo) {
 };
 
 $scope.signUp = function(){
+	localStorage.setItem("userNameInQJS", $scope.userName);
 	return false;
 	//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
 	//$scope.$apply();
