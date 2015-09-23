@@ -15,6 +15,7 @@
 
 	<title>Question Room: {{roomId}}</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/questionroom.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
@@ -23,64 +24,61 @@
 
 </head>
 <<<<<<< HEAD
-<body ng-controller="TodoCtrl" style="background-color:#eee">
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Question Room: {{roomId}}</a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	
-	  <div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
-		<form class="navbar-form navbar-header" novalidate role="form">
-			
-			<label>Tell me who you are: </label> 
-			<input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
-	   		
-			<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
-			class="btn btn-default" />
-		</form>
-	  </div>
-	  
-		<div ng-show="!isSignUpFormShow" class="navbar-header">
-		<ul  class="nav navbar-nav navbar-right">
-		<li>
-			<a >Nice to meet you! <strong>{{ userName }}</strong></a>
-			</li>
-		</ul>
+<body ng-controller="TodoCtrl" class="body">
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="#">Question Room: {{roomId}}</a>
 		</div>
-	  
-      <ul class="nav navbar-nav navbar-right">
-        <li><a  href="./index.html">Main</a></li>
-		<li>
-		<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
-		</li>
-		<!-- after login -->
-		<li>
-		<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
-		{{$authData.facebook.displayName}}
-		</li>
-		<li>
-		<button ng-show="$authData" type="button" class="btn btn-default navbar-btn" ng-click="FBLogout()">Logout</button>
-		</li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
 
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		
+		  <div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
+			<form class="navbar-form navbar-header" novalidate role="form">
+				
+				<label>Tell me who you are: </label> 
+				<input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
+				
+				<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
+				class="btn btn-default" />
+			</form>
+		  </div>
+		  
+			<div ng-show="!isSignUpFormShow" class="navbar-header">
+			<ul  class="nav navbar-nav navbar-right">
+			<li>
+				<a >Nice to meet you! <strong>{{ userName }}</strong></a>
+				</li>
+			</ul>
+			</div>
+		  
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a  href="./index.html">Main</a></li>
+			<li>
+			<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
+			</li>
+			<!-- after login -->
+			<li>
+			<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
+			{{$authData.facebook.displayName}}
+			</li>
+			<li>
+			<button ng-show="$authData" type="button" class="btn btn-default navbar-btn" ng-click="FBLogout()">Logout</button>
+			</li>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
 
-
-
-<div class="container">
+	<div class="container">
 <!--
 	<div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
 =======
@@ -121,14 +119,14 @@
 -->
 
 
-<div class="input-group" style="margin-top:80px">
+<div class="inputBox" >
 	<!--
 	<form id="todo-form" ng-submit="addTodo()">
 -->
-<textarea type="text" id="new-todo" class="form-control"
+<textarea type="text" id="new-todo" class="form-control "
 placeholder="Search or Post Question"
-ng-model="input.wholeMsg" style="height:100px;" autofocus></textarea>
-<span class="input-group-addon btn btn-default"  type="button" ng-click="addTodo()">Send</span>
+ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
+<button class="btnAsk" ng-click="addTodo()">Ask</button>
 
 </div><!-- /input-group -->
 
@@ -136,77 +134,58 @@ ng-model="input.wholeMsg" style="height:100px;" autofocus></textarea>
 <div class="list-group" id="todo-list">
 	<div
 		class="list-group-item"
-		style="margin:10px 0;"
+		style="margin:10px 0; padding:0"
 		ng-init="isCommentShow=false; isViewShow=false;"
 		ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
 		ng-class="{completed: todo.completed, editing: todo == editedTodo}"
 		>
+		<div class="questionBlock">
+			<div class="questionContent">
+				<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
+					<span class="label label-danger" ng-show="todo.new">New</span>
+					<!-- switch -->
+					<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
+					<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
+					<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
+					
+					<small class="stringTime">{{todo.dateString}}</small>
+				</h4>
 
-		<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar">
-			<span class="label label-danger" ng-show="todo.new">New</span>
-			<!-- switch -->
-			<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
-			<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
-			<span ng-class="{completed: todo.completed}">{{todo.head}}</span>
-			
-			<small style="margin: 0 5px">{{todo.dateString}}</small>
-		</h4>
+				<p class="list-group-item-text content" style="margin:3px 0">
+					<span ng-bind-html="todo.trustedDesc"></span>
+				</p>
+				<p>
+					<span ng-show="todo.tags" ng-repeat="tag in todo.tags">
+					<button class="badge" style="background-color:#40BEB5;padding:3px 7px;margin:0 3px; border:0" ng-click="tagToMsg(tag)">{{tag}}</button>
+					</span>
+				</p>
+			</div>
+			<div>
+				<button type="button" class="btn glyphicon glyphicon glyphicon-thumbs-up btnNav"  ng-click="addEcho(todo)">like{{todo.echo}}</button>
+				<button type="button" class="btn glyphicon glyphicon glyphicon-thumbs-down btnNav" ng-click="minusEcho(todo)">dislike{{todo.d_echo}}</button>
+				<button type="button" class="btn glyphicon glyphicon-comment btnNav" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
+				<button type="button" class="btn glyphicon glyphicon-pencil btnNav" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
+				<button ng-show="isAdmin" class="btn glyphicon glyphicon-check btnNav" ng-click="toggleCompleted(todo)">Completed</button>
+				<button ng-show="isAdmin" class="btn glyphicon glyphicon-trash btnNav" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+			</div>
+				<div ng-show="isCommentShow" ng-init="form=forms[$index]">
+					<form novalidate role="form">
 
-		<p class="list-group-item-text content" style="margin:3px 0">
-			<span ng-bind-html="todo.trustedDesc"></span>
-		</p>
-		<p>
-			<span ng-show="todo.tags" ng-repeat="tag in todo.tags">
-			<button class="badge" style="background-color:#40BEB5;padding:3px 7px;margin:0 3px; border:0" ng-click="tagToMsg(tag)">{{tag}}</button>
-			</span>
-		</p>
-		
-		<div style="height:10px">
-		<div class="container-fluid">
-			<ul class="nav navbar-nav">
-			<li>
-			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon glyphicon-thumbs-up" style="width:80px"  ng-click="addEcho(todo)" ng-disabled="$storage[todo.$id]">like{{todo.echo}}</button>
-			</li>
-			<li>
-			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon glyphicon-thumbs-down" style="width:80px" ng-click="minusEcho(todo)" ng-disabled="$storage[todo.$id]">dislike{{todo.d_echo}}</button>
-			</li>
-			<li>
-			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon-comment" style="width:80px" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
-			</li>
-			<li>
-			<button type="button" class="btn btn-default btn-xs navbar-btn glyphicon glyphicon-pencil" style="width:80px" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">Comment</button>
-			</li>
-			</ul>		
+						<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
+
+						<input type="submit" ng-click="isCommentShow = addComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
+
+					</form>
+				</div>
+
 		</div>
-		</div>
-			
-		<div ng-show="isCommentShow" ng-init="form=forms[$index]">
-			<br>
-			<form novalidate role="form">
-
-				<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
-		   
-				<input type="submit" ng-click="isCommentShow = addComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
-			</form>
-		</div>
-			
-
-		<div class="container" ng-show="isViewShow">
-			<div ng-repeat="comment in todo.comments">
-				<hr>
+		<div ng-show="isViewShow">
+			<div class="container" style="padding:0 20px" ng-repeat="comment in todo.comments" >
 				<p>{{ comment.name }}: {{ comment.msg }}</p>
 			</div>
-
-			<hr>
-			<button class="btn btn-default btn-xs glyphicon glyphicon-chevron-up" ng-click="isViewShow=false">Close</button>
 		</div>
 
 
-
-			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-check" ng-click="toggleCompleted(todo)">Toggle Completed</button>
-
-			&nbsp;
-			<button ng-show="isAdmin" class="btn btn-default btn-xs glyphicon glyphicon-trash" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
 	</div>	
 </div>
 </div>
