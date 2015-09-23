@@ -183,14 +183,14 @@ $scope.addTodo = function () {
 	}
 
 	var res = $scope.getTags(newTodo);
-	newTodo = res[0];
+	var newTodo_nt = res[0];
 	var tags = res[1];
 	
 	if (!newTodo.length) {
 		return;
 	}
 	
-	var firstAndLast = $scope.getFirstAndRestSentence(newTodo);
+	var firstAndLast = $scope.getFirstAndRestSentence(newTodo_nt);
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
 

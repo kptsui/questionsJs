@@ -63,7 +63,7 @@ ng-model="input.wholeMsg" autofocus></textarea>
 	<span
 		class="list-group-item"
 		ng-init="isCommentShow=false; isViewShow=false;"
-		ng-repeat="todo in todos | filter:input.wholeMsg | questionFilter:maxQuestion"
+		ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
 		ng-class="{completed: todo.completed, editing: todo == editedTodo}"
 		>
 
