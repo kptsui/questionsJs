@@ -317,7 +317,7 @@ $scope.editTodo = function (todo) {
 };
 
 // Like button
-$scope.addEcho = function (todo) {
+$scope.addEcho = function (todo) {    //in bug cause like to clear trustedDesc
 	if ($scope.$storage[todo.$id]=="echoed")
 	{
 		$scope.editedTodo = todo;
@@ -326,7 +326,8 @@ $scope.addEcho = function (todo) {
 		todo.order = todo.order + 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "";
-		todo.likeStyle= 'none';
+		//todo.opinion = "none";
+		todo.like = false;
 	}
 	else if ($scope.$storage[todo.$id]!="d_echoed")
 	{
@@ -336,7 +337,8 @@ $scope.addEcho = function (todo) {
 		todo.order = todo.order - 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "echoed";
-		todo.likeStyle= 'bold';
+		//todo.opinion = "like";
+		todo.like = true;
 	}	
 };
 
@@ -350,6 +352,7 @@ $scope.minusEcho = function (todo) {
 		todo.order = todo.order + 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "";
+		todo.dislike = false;
 	}
 	else if ($scope.$storage[todo.$id]!="echoed")
 	{
@@ -359,6 +362,7 @@ $scope.minusEcho = function (todo) {
 		todo.order = todo.order - 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "d_echoed";
+		todo.dislike = true;
 	}	
 
 	// Disable the button
