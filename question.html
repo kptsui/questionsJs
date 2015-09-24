@@ -126,7 +126,13 @@
 	<textarea type="text" id="new-todo" class="form-control "
 	placeholder="Search or Post Question"
 	ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
-	<button class="btnAsk" ng-click="addTodo()">Ask</button>
+	<div class="inputClear">
+		<button class="btnClear btn-no-outline glyphicon glyphicon-remove" ng-click="clearMsg()"></button>
+	</div>
+	<div class="inputAsk">
+		
+		<button class="btnAsk glyphicon glyphicon-send" ng-click="addTodo()"> Ask</button>
+	</div>
 </div><!-- /input-group -->
 
 <br><br>
@@ -162,12 +168,12 @@
 
 			</div>
 			<div>
-				<button type="button" class="btn glyphicon glyphicon glyphicon-thumbs-up btnNav"  ng-click="addEcho(todo)">like{{todo.echo}}</button>
-				<button type="button" class="btn glyphicon glyphicon glyphicon-thumbs-down btnNav" ng-click="minusEcho(todo)">dislike{{todo.d_echo}}</button>
-				<button type="button" class="btn glyphicon glyphicon-comment btnNav" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
-				<button type="button" class="btn glyphicon glyphicon-pencil btnNav" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
-				<button ng-show="isAdmin" class="btn glyphicon glyphicon-check btnNav" ng-click="toggleCompleted(todo)">Completed</button>
-				<button ng-show="isAdmin" class="btn glyphicon glyphicon-trash btnNav" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+				<button type="button" class="btn btn-no-outline glyphicon glyphicon glyphicon-thumbs-up btnNav"  ng-click="addEcho(todo)">like{{todo.echo}}</button>
+				<button type="button" class="btn btn-no-outline glyphicon glyphicon glyphicon-thumbs-down btnNav" ng-click="minusEcho(todo)">dislike{{todo.d_echo}}</button>
+				<button type="button" class="btn btn-no-outline glyphicon glyphicon-comment btnNav" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
+				<button type="button" class="btn btn-no-outline glyphicon glyphicon-pencil btnNav" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
+				<button ng-show="isAdmin" class="btn btn-no-outline glyphicon glyphicon-check btnNav" ng-click="toggleCompleted(todo)">Completed</button>
+				<button ng-show="isAdmin" class="btn btn-no-outline glyphicon glyphicon-trash btnNav" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
 			</div>
 				<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 					<form novalidate role="form">

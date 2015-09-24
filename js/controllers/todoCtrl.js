@@ -228,6 +228,10 @@ $scope.getFirstAndRestSentence = function($string) {
 	return [head, desc];
 };
 
+$scope.clearMsg = function() {
+	$scope.input = {wholeMsg: ""};
+}
+
 // update msg string to tag string for quick tag search
 $scope.tagToMsg = function($tag) {
 	$scope.input = {wholeMsg: $tag};
