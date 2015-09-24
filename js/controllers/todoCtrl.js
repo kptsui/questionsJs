@@ -160,7 +160,7 @@ $scope.$watchCollection('todos', function () {
 		// set message
 		//todo.tags = todo.wholeMsg.match(/#\w+/g);
 
-		todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
+		//todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
 	});
 
 	$scope.totalCount = total;

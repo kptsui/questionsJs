@@ -6,6 +6,10 @@
 * Show the new questions on the top and show only max questions 
 *
 */
+todomvc.filter('unsafe', function($sce) { 
+	return $sce.trustAsHtml; 
+});
+
 todomvc.filter('questionFilter', function () {
   return function (input, max) {
     var sorted = [];
