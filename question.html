@@ -43,7 +43,7 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			
-				<div ng-init="isSignUpFormShow=true" ng-show="isSignUpFormShow">
+				<div ng-show="isSignUpFormShow">
 					<form class="navbar-form navbar-header" novalidate role="form">
 						
 						<label>Tell me who you are: </label> 
@@ -174,7 +174,7 @@
 
 						<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
 
-						<input type="submit" ng-click="isCommentShow = addComment(form, todo)" class="btn btn-info btn-sm" value="submit" />
+						<input type="submit" ng-click="isCommentShow = addComment(form, todo); isViewShow = !isCommentShow;" class="btn btn-info btn-sm" value="submit" />
 
 					</form>
 				</div>
