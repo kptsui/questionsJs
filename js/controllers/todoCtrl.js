@@ -318,23 +318,48 @@ $scope.editTodo = function (todo) {
 
 // Like button
 $scope.addEcho = function (todo) {
-	$scope.editedTodo = todo;
-	todo.echo = todo.echo + 1;
-	// Hack to order using this order.
-	todo.order = todo.order -1;
-	$scope.todos.$save(todo);
-
-	// Disable the button
-	//$scope.$storage[todo.$id] = "echoed";
+	if ($scope.$storage[todo.$id]=="echoed")
+	{
+		$scope.editedTodo = todo;
+		todo.echo = todo.echo - 1;
+		// Hack to order using this order.
+		todo.order = todo.order + 1;
+		$scope.todos.$save(todo);
+		$scope.$storage[todo.$id] = "";
+		todo.likeStyle= 'none';
+	}
+	else if ($scope.$storage[todo.$id]!="d_echoed")
+	{
+		$scope.editedTodo = todo;
+		todo.echo = todo.echo + 1;
+		// Hack to order using this order.
+		todo.order = todo.order - 1;
+		$scope.todos.$save(todo);
+		$scope.$storage[todo.$id] = "echoed";
+		todo.likeStyle= 'bold';
+	}	
 };
 
 // Dislike button
 $scope.minusEcho = function (todo) {
-	$scope.editedTodo = todo;
-	todo.d_echo = todo.d_echo +1;
-	// Hack to order using this order.
-	todo.order = todo.order +1;
-	$scope.todos.$save(todo);
+	if ($scope.$storage[todo.$id]=="d_echoed")
+	{
+		$scope.editedTodo = todo;
+		todo.d_echo = todo.d_echo - 1;
+		// Hack to order using this order.
+		todo.order = todo.order + 1;
+		$scope.todos.$save(todo);
+		$scope.$storage[todo.$id] = "";
+	}
+	else if ($scope.$storage[todo.$id]!="echoed")
+	{
+		$scope.editedTodo = todo;
+		todo.d_echo = todo.d_echo + 1;
+		// Hack to order using this order.
+		todo.order = todo.order - 1;
+		$scope.todos.$save(todo);
+		$scope.$storage[todo.$id] = "d_echoed";
+	}	
 
 	// Disable the button
 	//$scope.$storage[todo.$id] = "echoed";

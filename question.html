@@ -130,8 +130,7 @@
 		<button class="btnClear btn-no-outline glyphicon glyphicon-remove" ng-click="clearMsg()"></button>
 	</div>
 	<div class="inputAsk">
-		
-		<button class="btnAsk glyphicon glyphicon-send" ng-click="addTodo()"> Ask</button>
+		<button class="btnAsk btn-no-outline glyphicon glyphicon-send" ng-click="addTodo()"> Ask</button>
 	</div>
 </div><!-- /input-group -->
 
@@ -144,7 +143,7 @@
 		ng-init="isCommentShow=false; isViewShow=false;"
 		ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
 		ng-class="{completed: todo.completed, editing: todo == editedTodo}"
-		 ng-style="{'background-color' : todo.bgColor }"
+		ng-style="{'background-color' : todo.bgColor }"
 		>
 		<div class="questionBlock">
 			<div class="questionContent">
@@ -168,8 +167,18 @@
 
 			</div>
 			<div>
-				<button type="button" class="btn btn-no-outline glyphicon glyphicon glyphicon-thumbs-up btnNav"  ng-click="addEcho(todo)">like{{todo.echo}}</button>
-				<button type="button" class="btn btn-no-outline glyphicon glyphicon glyphicon-thumbs-down btnNav" ng-click="minusEcho(todo)">dislike{{todo.d_echo}}</button>
+				<button 
+					type="button" 
+					class="btn btn-no-outline glyphicon glyphicon glyphicon-thumbs-up btnNav"
+					ng-click="addEcho(todo)">
+					like{{todo.echo}}
+				</button>
+				<button 
+					type="button" 
+					class="btn btn-no-outline glyphicon glyphicon glyphicon-thumbs-down btnNav" 
+					ng-click="minusEcho(todo)">
+					dislike{{todo.d_echo}}
+				</button>
 				<button type="button" class="btn btn-no-outline glyphicon glyphicon-comment btnNav" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
 				<button type="button" class="btn btn-no-outline glyphicon glyphicon-pencil btnNav" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
 				<button ng-show="isAdmin" class="btn btn-no-outline glyphicon glyphicon-check btnNav" ng-click="toggleCompleted(todo)">Completed</button>
