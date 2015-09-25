@@ -288,6 +288,8 @@ $scope.addTodo = function () {
 	var head = firstAndLast[0];
 	var desc = firstAndLast[1];
 
+	var userName = $scope.userName;
+	newTodo = userName + " " + newTodo;
 	//****************************************
 	//****************************************
 	//****************************************
@@ -304,7 +306,7 @@ $scope.addTodo = function () {
 		d_echo: 0,
 		order: 0,
 		views: 0,
-		op: $scope.userName
+		op: userName
 		//comments: [{name: "", msg : ""}]
 	});
 	// remove the posted question in the input

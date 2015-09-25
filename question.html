@@ -112,7 +112,8 @@
 						<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 						<span ng-class="{completed: todo.completed}"><strong>{{todo.head}}</strong></span>
 						
-						<small class="stringTime">{{todo.dateString}} ago by {{todo.op}}</small>
+						<small class="stringTime">{{todo.dateString}} ago by 
+						<span ng-click="tagToMsg(todo.op)" style="text-decoration:underline">{{todo.op}}</span></small>
 					</h4>
 
 						<p ng-show="todo.linkedDesc" ng-bind-html="todo.linkedDesc | unsafe" style="padding-left:10px"></p>
