@@ -85,7 +85,7 @@
 		placeholder="Search or Post Question"
 		ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
 		<div class="inputClear">
-			<button class="btnClear btn-no-outline glyphicon glyphicon-remove" ng-click="clearMsg()"></button>
+			<button ng-show="input.wholeMsg" class="btnClear btn-no-outline glyphicon glyphicon-remove" ng-click="clearMsg()"></button>
 		</div>
 		<div class="inputAsk">
 			<button class="btnAsk btn-no-outline glyphicon glyphicon-send" ng-click="addTodo()"> Ask</button>
