@@ -9,7 +9,7 @@
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
-	
+	$scope.predicate = "-timestamp";
 	if(localStorage.getItem("userNameInQJS")){
 		$scope.userName = localStorage.getItem("userNameInQJS");
 		$scope.isSignUpFormShow = false;
@@ -17,7 +17,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 	else{
 		$scope.isSignUpFormShow = true;
 	}
-
+	
 	// initialize later
 	// for each questions
 	$scope.comments = [];
@@ -206,6 +206,15 @@ $scope.signUp = function(){
 	//$scope.$apply();
 };
 
+$scope.changeOrder = function(predicate){
+	if(predicate ==  $scope.predicate){ //both is -predicate
+		$scope.predicate = predicate.substr(1);
+	}
+	else{
+		$scope.predicate = predicate;
+	}
+};
+
 // Get the first sentence and rest
 $scope.getFirstAndRestSentence = function($string) {
 	var head = $string;
@@ -292,6 +301,7 @@ $scope.addTodo = function () {
 	newTodo = userName + " " + newTodo;
 	//****************************************
 	//****************************************
+	var position = $scope.todos.length;
 	//****************************************
 	$scope.todos.$add({
 		wholeMsg: newTodo,
@@ -304,7 +314,7 @@ $scope.addTodo = function () {
 		tags: tags,
 		echo: 0,
 		d_echo: 0,
-		order: 0,
+		order: position,
 		views: 0,
 		op: userName
 		//comments: [{name: "", msg : ""}]
@@ -325,7 +335,7 @@ $scope.addEcho = function (todo) {    //in bug cause like to clear trustedDesc
 		$scope.editedTodo = todo;
 		todo.echo = todo.echo - 1;
 		// Hack to order using this order.
-		todo.order = todo.order + 1;
+		//todo.order = todo.order + 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "";
 		//todo.opinion = "none";
@@ -336,7 +346,7 @@ $scope.addEcho = function (todo) {    //in bug cause like to clear trustedDesc
 		$scope.editedTodo = todo;
 		todo.echo = todo.echo + 1;
 		// Hack to order using this order.
-		todo.order = todo.order - 1;
+		//todo.order = todo.order - 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "echoed";
 		//todo.opinion = "like";
@@ -351,7 +361,7 @@ $scope.minusEcho = function (todo) {
 		$scope.editedTodo = todo;
 		todo.d_echo = todo.d_echo - 1;
 		// Hack to order using this order.
-		todo.order = todo.order + 1;
+		//todo.order = todo.order + 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "";
 		todo.dislike = false;
@@ -361,7 +371,7 @@ $scope.minusEcho = function (todo) {
 		$scope.editedTodo = todo;
 		todo.d_echo = todo.d_echo + 1;
 		// Hack to order using this order.
-		todo.order = todo.order - 1;
+		//todo.order = todo.order - 1;
 		$scope.todos.$save(todo);
 		$scope.$storage[todo.$id] = "d_echoed";
 		todo.dislike = true;

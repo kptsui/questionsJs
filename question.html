@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
-	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="css/main.css">
 
 </head>
 
@@ -62,16 +62,36 @@
 			  
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a  href="./index.html">Main</a></li>
+						<a  href="./index.html">Main</a>
+					</li>
+					
 					<li>
 						<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
 					</li>
+					
 					<li>
 						<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
 					{{$authData.facebook.displayName}}
 					</li>
+					
 					<li>
 						<button ng-show="$authData" type="button" class="btn btn-default navbar-btn" ng-click="FBLogout()">Logout</button>
+					</li>
+					
+					<li>
+						<div class="dropdown">
+							<button class="btn btn-default navbar-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								Sorting<span class="caret"></span>
+							</button>
+							
+							<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li><a href="" ng-click="changeOrder('-timestamp')">Most Recent</a></li>
+								<li><a href="" ng-click="changeOrder('-views')">Most Reply</a></li>
+								<li><a href="" ng-click="changeOrder('-echo')">Most Like</a></li>
+								<li><a href="" ng-click="changeOrder('-d_echo')">Most Dislike</a></li>
+								<li><a href="" ng-click="changeOrder('-head')">By Topic</a></li>
+							</ul>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -100,7 +120,7 @@
 			class="list-group-item"
 			style="margin:10px 0; padding:0"
 			ng-init="isCommentShow=false; isViewShow=false;"
-			ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion"
+			ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion | orderBy:predicate"
 			ng-class="{completed: todo.completed, editing: todo == editedTodo}"
 			ng-style="{'background-color' : todo.bgColor }"
 			>
@@ -111,6 +131,9 @@
 						<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
 						<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 						<span ng-class="{completed: todo.completed}"><strong>{{todo.head}}</strong></span>
+						
+						<!-- never to show, just need its variable for sorting-->
+						<span ng-show="false">{{todo.timestamp}}</span>
 						
 						<small class="stringTime">{{todo.dateString}} ago by 
 						<span ng-click="tagToMsg(todo.op)" style="text-decoration:underline">{{todo.op}}</span></small>
@@ -123,39 +146,41 @@
 						</span>
 				</div>
 				<div>
+					<br>
 					<button 
 						type="button" 
-						class="btn btn-no-outline  btnNav"
+						class="btn btn-link "
 						ng-click="addEcho(todo)">
 						<i ng-show="todo.like" class="fa fa-thumbs-o-up"></i>
 						<i ng-hide="todo.like" class="fa fa-thumbs-up"></i>
-						like{{todo.echo}}
+						{{todo.echo}}
 					</button>
 					<button 
 						type="button" 
-						class="btn btn-no-outline btnNav" 
+						class="btn btn-link " 
 						ng-click="minusEcho(todo)">
 						<i ng-show="todo.dislike" class="fa fa-thumbs-o-down"></i>
 						<i ng-hide="todo.dislike" class="fa fa-thumbs-down"></i>
-						dislike{{todo.d_echo}}
+						{{todo.d_echo}}
 					</button>
-					<button type="button" class="btn btn-no-outline glyphicon glyphicon-comment btnNav" ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
-					<button type="button" class="btn btn-no-outline glyphicon glyphicon-pencil btnNav" ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
-					<button ng-show="isAdmin" class="btn btn-no-outline glyphicon glyphicon-check btnNav" ng-click="toggleCompleted(todo)">Completed</button>
-					<button ng-show="isAdmin" class="btn btn-no-outline glyphicon glyphicon-trash btnNav" aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+					<button type="button" class="btn btn-link glyphicon glyphicon-comment " ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
+					<button type="button" class="btn btn-link  glyphicon glyphicon-pencil " ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
+					<button ng-show="isAdmin" class="btn btn-link  glyphicon glyphicon-check " ng-click="toggleCompleted(todo)">Completed</button>
+					<button ng-show="isAdmin" class="btn btn-link  glyphicon glyphicon-trash " aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
 				</div>
 					<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 						<form novalidate role="form">
 
 							<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
 
-							<input type="submit" ng-click="isCommentShow = addComment(form, todo); isViewShow = !isCommentShow;" class="btn btn-info btn-sm" value="submit" />
+							<input type="submit" ng-click="isCommentShow = addComment(form, todo); isViewShow = !isCommentShow;" class="btn btn-info " value="submit" />
 
 						</form>
 					</div>
 
 			</div>
 			<div ng-show="isViewShow">
+				<hr>
 				<div class="container" style="padding:0 20px" ng-repeat="comment in todo.comments" >
 					<p>{{ comment.name }}: {{ comment.msg }} <small style="padding-left:10px">{{ comment.dateString }}</small></p>
 					
