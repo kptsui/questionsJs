@@ -9,7 +9,7 @@
 todomvc.controller('TodoCtrl',
 ['$scope', '$location', '$firebaseArray', '$sce', '$localStorage', '$window',
 function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
-	$scope.predicate = "-timestamp";
+	$scope.predicate = '';
 	if(localStorage.getItem("userNameInQJS")){
 		$scope.userName = localStorage.getItem("userNameInQJS");
 		$scope.isSignUpFormShow = false;
@@ -301,7 +301,13 @@ $scope.addTodo = function () {
 	newTodo = userName + " " + newTodo;
 	//****************************************
 	//****************************************
-	var position = $scope.todos.length;
+	var position;
+	if($scope.todos.length == 0){
+		position = -1;
+	}
+	else{
+		position = -1 - $scope.todos.length;
+	}
 	//****************************************
 	$scope.todos.$add({
 		wholeMsg: newTodo,
