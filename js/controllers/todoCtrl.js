@@ -113,12 +113,12 @@ function timeInterpreter(res_date){
 		if (output == 0)
 			output = "just posted";
 		else
-			output += " s";
+			output += " s ago";
 	}
 	else if (res_date > now.getTime() - 60 * 60 * 1000) // 1 hour
-		output = Math.round((now-res_date)/(60000)) + " mins"
+		output = Math.round((now-res_date)/(60000)) + " mins ago"
 	else if (res_date > now.getTime() - 24 * 60 * 60 * 1000) // 1 day
-		output = Math.round((now-res_date)/(3600000)) + " hrs"
+		output = Math.round((now-res_date)/(3600000)) + " hrs ago"
 	else if (res_date.getMonth() == now.getMonth())
 		output = dateConverter(res_date, now) + " at " + timeConverter(res_date);
 	else
