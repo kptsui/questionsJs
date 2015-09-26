@@ -146,28 +146,50 @@
 						<button class="badge" style="background-color:#40BEB5;padding:3px 7px;margin:0 3px; border:0" ng-click="tagToMsg(tag)">{{tag}}</button>
 						</span>
 				</div>
-				<div>
+				<div style="margin:0 0 5px 5px">
 					<br>
 					<button 
 						type="button" 
-						class="btn btn-link "
+						class="btn btn-link btnNav"
 						ng-click="addEcho(todo)">
-						<i ng-show="todo.like" class="fa fa-thumbs-o-up"></i>
-						<i ng-hide="todo.like" class="fa fa-thumbs-up"></i>
-						{{todo.echo}}
+						<i ng-show="showLike(todo.$id)" class="fa fa-thumbs-o-up"> {{todo.echo}}</i>
+						<i ng-hide="showLike(todo.$id)" class="fa fa-thumbs-up"> {{todo.echo}}</i>
 					</button>
 					<button 
 						type="button" 
-						class="btn btn-link " 
+						class="btn btn-link btnNav" 
 						ng-click="minusEcho(todo)">
-						<i ng-show="todo.dislike" class="fa fa-thumbs-o-down"></i>
-						<i ng-hide="todo.dislike" class="fa fa-thumbs-down"></i>
-						{{todo.d_echo}}
+						<i ng-show="showDislike(todo.$id)" class="fa fa-thumbs-o-down"> {{todo.d_echo}}</i>
+						<i ng-hide="showDislike(todo.$id)" class="fa fa-thumbs-down"> {{todo.d_echo}}</i>
 					</button>
-					<button type="button" class="btn btn-link glyphicon glyphicon-comment " ng-click="isViewShow=!isViewShow">{{todo.views}}</button>
-					<button type="button" class="btn btn-link  glyphicon glyphicon-pencil " ng-click="isCommentShow=!isCommentShow" ng-show="!isSignUpFormShow">reply</button>
-					<button ng-show="isAdmin" class="btn btn-link  glyphicon glyphicon-check " ng-click="toggleCompleted(todo)">Completed</button>
-					<button ng-show="isAdmin" class="btn btn-link  glyphicon glyphicon-trash " aria-hidden="true" ng-click="removeTodo(todo)">Del</button>
+					<button 
+						type="button" 
+						class="btn btn-link btnNav" 
+						ng-click="isViewShow=!isViewShow">
+						<i ng-show="todo.views" class="fa fa-commenting-o"> {{todo.views}}</i>
+						<i ng-hide="todo.views" class="fa fa-comment-o"> {{todo.views}}</i>
+					</button>
+					<button 
+						type="button" 
+						class="btn btn-link btnNav-long" 
+						ng-click="isCommentShow=!isCommentShow" 
+						ng-show="!isSignUpFormShow">
+						<i class="fa fa-pencil-square-o"> Comment</i>
+						</button>
+					<button 
+						ng-show="isAdmin" 
+						class="btn btn-link" 
+						ng-click="toggleCompleted(todo)">
+						<i ng-show="todo.completed" class="fa fa-check-square-o"> Done</i>
+						<i ng-hide="todo.completed" class="fa fa-square-o"> Done</i>
+						</button>
+					<button 
+						ng-show="isAdmin" 
+						class="btn btn-link" 
+						aria-hidden="true" 
+						ng-click="removeTodo(todo)">
+						<i class="fa fa-trash-o"> Del</i>
+						</button>
 				</div>
 					<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 						<form novalidate role="form">

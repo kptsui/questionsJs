@@ -399,6 +399,17 @@ $scope.minusEcho = function (todo) {
 	//$scope.$storage[todo.$id] = "echoed";
 };
 
+$scope.showLike = function (id){
+	if ($scope.$storage[id] == "echoed")
+		return true;
+	return false;
+}
+
+$scope.showDislike = function (id){
+	if ($scope.$storage[id] == "d_echoed")
+		return true;
+	return false;
+}
 
 $scope.doneEditing = function (todo) {
 	$scope.editedTodo = null;
@@ -496,9 +507,9 @@ $scope.location = $location;
 // autoscroll
 angular.element($window).bind("scroll", function() {
 	if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
-		console.log('Hit the bottom2. innerHeight' +
-		$window.innerHeight + "scrollY" +
-		$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
+		//console.log('Hit the bottom2. innerHeight' +
+		//$window.innerHeight + "scrollY" +
+		//$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
 
 		// update the max value
 		$scope.increaseMax();
