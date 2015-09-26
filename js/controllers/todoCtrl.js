@@ -200,8 +200,20 @@ $scope.addComment = function(form, todo) {
 };
 
 $scope.signUp = function(){
-	localStorage.setItem("userNameInQJS", $scope.userName);
-	return false;
+	if ($scope.userName)
+	{
+		localStorage.setItem("userNameInQJS", $scope.userName);
+		return false;
+	}
+	else
+		return true;
+	//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
+	//$scope.$apply();
+};
+
+$scope.signOut = function(){
+	$scope.userName = "";
+	return true;
 	//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
 	//$scope.$apply();
 };
