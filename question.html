@@ -123,7 +123,7 @@
 			ng-init="isCommentShow=false; isViewShow=false;"
 			ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion | orderBy:predicate"
 			ng-class="{completed: todo.completed, editing: todo == editedTodo}"
-			ng-style="{'background-color' : todo.bgColor }"
+			ng-style="{'background-color' : todo.bgColor , 'border' : thisIsMine(todo.op)}"
 			>
 			<div class="questionBlock">
 				<div class="questionContent">

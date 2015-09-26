@@ -439,6 +439,13 @@ $scope.markAll = function (allCompleted) {
 	});
 };
 
+$scope.thisIsMine = function(op){
+	if (op==$scope.userName)
+		return '2px solid #49C7C3';
+	else
+		return 'none';
+}
+
 $scope.FBLogin = function () {
 	if (!noFB)
 	{
