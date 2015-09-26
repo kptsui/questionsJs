@@ -45,7 +45,7 @@
 					<form class="navbar-form navbar-header" novalidate role="form">
 						
 						<label>Tell me who you are: </label> 
-						<input type="text" ng-model="userName" placeholder="Name" class="input-sm"/>
+						<input type="text" ng-model="userName" placeholder="a nickname is ok" class="input-sm"/>
 						
 						<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
 						class="btn btn-default" />
@@ -55,7 +55,7 @@
 				<div ng-show="!isSignUpFormShow" class="navbar-header">
 				<ul  class="nav navbar-nav navbar-right">
 					<li>
-						<a >Nice to meet you! <strong>{{ userName }}</strong></a>
+						<a  ng-click="isSignUpFormShow=signOut()">Nice to meet you! <strong>{{ userName }}</strong></a>
 						</li>
 					</ul>
 				</div>
@@ -79,7 +79,7 @@
 					</li>
 					
 					<li>
-						<div class="dropdown">
+						<div class="dropdown" style = "margin:0 10px">
 							<button class="btn btn-default navbar-btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 								Sorting<span class="caret"></span>
 							</button>
@@ -91,6 +91,7 @@
 								<li><a href="" ng-click="changeOrder('-d_echo')">Most Dislike</a></li>
 								<li><a href="" ng-click="changeOrder('-head')">By Topic</a></li>
 								<li><a href="" ng-click="changeOrder('')">Default</a></li>
+								<li ng-show="isAdmin"><a href="" ng-click="changeOrder('completed')">Completed</a></li>
 							</ul>
 						</div>
 					</li>
@@ -136,7 +137,7 @@
 						<!-- never to show, just need its variable for sorting-->
 						<span ng-show="false">{{todo.timestamp}}</span>
 						
-						<small class="stringTime">{{todo.dateString}} ago by 
+						<small class="stringTime">{{todo.dateString}} by 
 						<span ng-click="tagToMsg(todo.op)" style="text-decoration:underline">{{todo.op}}</span></small>
 					</h4>
 
@@ -181,10 +182,12 @@
 
 			</div>
 			<div ng-show="isViewShow">
-				<hr>
-				<div class="container" style="padding:0 20px" ng-repeat="comment in todo.comments" >
-					<p>{{ comment.name }}: {{ comment.msg }} <small style="padding-left:10px">{{ comment.dateString }}</small></p>
-					
+				<div ng-show="todo.comments">
+					<hr>
+					<div class="container" style="padding:0 20px" ng-repeat="comment in todo.comments" >
+						<p>{{ comment.name }}: {{ comment.msg }} <small style="padding-left:10px">{{ comment.dateString }}</small></p>
+						
+					</div>
 				</div>
 			</div>
 
