@@ -206,9 +206,8 @@
 			<div ng-show="isViewShow">
 				<div ng-show="todo.comments">
 					<hr>
-					<div class="container" style="padding:0 20px" ng-repeat="comment in todo.comments" >
+					<div class="container-fluid" style="word-wrap: break-word; padding:0 10px 0 20px" ng-repeat="comment in todo.comments" >
 						<p>{{ comment.name }}: {{ comment.msg }} <small style="padding-left:10px">{{ comment.dateString }}</small></p>
-						
 					</div>
 				</div>
 			</div>
