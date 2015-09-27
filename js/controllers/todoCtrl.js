@@ -106,9 +106,9 @@ return(FormatNumberLength(hours,2) + ':' + FormatNumberLength(minutes,2));
 function timeInterpreter(res_date){
 	var output = "";
 	var now = new Date();
-	if (res_date > now.getTime())
-		output = "Time traveller! - " + dateConverter(res_date, now) + " at " + timeConverter(res_date);
-	else if (res_date > now.getTime() - 60 * 1000) // 1 min
+	//if (res_date > now.getTime())
+		//output = "Time traveller! - " + dateConverter(res_date, now) + " at " + timeConverter(res_date);
+	if (res_date > now.getTime() - 60 * 1000) // 1 min
 	{
 		output = Math.round((now-res_date)/1000);
 		if (output == 0)
