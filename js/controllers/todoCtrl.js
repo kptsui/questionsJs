@@ -15,6 +15,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 		$scope.isSignUpFormShow = false;
 	}
 	else{
+		$scope.userName = "";
 		$scope.isSignUpFormShow = true;
 	}
 	
@@ -311,6 +312,7 @@ $scope.addTodo = function () {
 
 	var userName = $scope.userName;
 	newTodo = userName + " " + newTodo;
+	userName = userName?userName:'annoymous';
 	//****************************************
 	//****************************************
 	var position;
