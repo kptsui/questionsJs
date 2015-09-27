@@ -136,7 +136,7 @@
 						<span ng-show="false">{{todo.timestamp}}</span>
 						
 						<small class="stringTime">{{todo.dateString}} by 
-						<span ng-click="tagToMsg(todo.op)" style="text-decoration:underline">{{todo.op}}</span></small>
+						<strong ng-click="tagToMsg(todo.op)" class="commentName">{{todo.op}}</strong></small>
 					</h4>
 
 						<p ng-show="todo.linkedDesc" ng-bind-html="todo.linkedDesc | unsafe" style="padding-left:10px"></p>
@@ -207,7 +207,7 @@
 				<div ng-show="todo.comments">
 					<hr>
 					<div class="container-fluid" style="word-wrap: break-word; padding:0 10px 0 20px" ng-repeat="comment in todo.comments" >
-						<p>{{ comment.name }}: {{ comment.msg }} <small style="padding-left:10px">{{ comment.dateString }}</small></p>
+						<p><strong class="commentName">{{ comment.name }}</strong> {{ comment.msg }}<br><small>{{ comment.dateString }}</small></p>
 					</div>
 				</div>
 			</div>

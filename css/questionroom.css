@@ -44,6 +44,9 @@
 	margin:0;
 	padding:0;
 }
+.commentName{
+	color:#327AC0;
+}
 .stringTime{
 	margin: 0 10px;
 }
