@@ -44,7 +44,7 @@
 				<div ng-show="isSignUpFormShow">
 					<form class="navbar-form navbar-header" novalidate role="form">
 						
-						<label>Tell me who you are: </label> 
+						<label>name: </label> 
 						<input type="text" ng-model="userName" placeholder="a nickname is ok" class="input-sm"/>
 						
 						<input type="submit" ng-click="isSignUpFormShow=signUp()" value="Sign" 
@@ -106,10 +106,12 @@
 		placeholder="Search or Post Question"
 		ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
 		<div class="inputClear">
-			<button ng-show="input.wholeMsg" class="btnClear btn-no-outline glyphicon glyphicon-remove" ng-click="clearMsg()"></button>
+			<button ng-show="input.wholeMsg" class="btnClear btn-no-outline" ng-click="clearMsg()">
+			<i class=" fa fa-times-circle"></i>
+			</button>
 		</div>
 		<div class="inputAsk">
-			<button class="btnAsk btn-no-outline glyphicon glyphicon-send" ng-click="addTodo()"> Ask</button>
+			<button class="btnAsk btn-no-outline fa fa-paper-plane" ng-click="addTodo()"> Ask</button>
 		</div>
 	</div><!-- /input-group -->
 
@@ -125,12 +127,9 @@
 			ng-class="{completed: todo.completed, editing: todo == editedTodo}"
 			ng-style="{'background-color' : todo.bgColor , 'border' : thisIsMine(todo.op)}"
 			>
-			<div class="questionBlock">
+			<div class="questionBlock" style="word-wrap: break-word">
 				<div class="questionContent">
 					<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar" ng-style="{'color' : todo.textColor }">
-						
-						<span ng-switch-when="?" class="glyphicon glyphicon-question-sign"></span>
-						<span ng-switch-when="!" class="glyphicon glyphicon-ice-lolly"></span>
 						<span ng-class="{completed: todo.completed}"><strong>{{todo.head}}</strong></span>
 						
 						<!-- never to show, just need its variable for sorting-->
@@ -143,7 +142,9 @@
 						<p ng-show="todo.linkedDesc" ng-bind-html="todo.linkedDesc | unsafe" style="padding-left:10px"></p>
 					
 						<span ng-show="todo.tags" ng-repeat="tag in todo.tags">
+						<div style="overflow:hidden">
 						<button class="badge" style="background-color:#40BEB5;padding:3px 7px;margin:0 3px; border:0" ng-click="tagToMsg(tag)">{{tag}}</button>
+						</div>
 						</span>
 				</div>
 				<div style="margin:0 0 5px 5px">
@@ -220,17 +221,9 @@
 
 	
 </div>
-	<!--
-
+<!--
 	<div id="toTop" class="btn btn-info"><span class="fa fa-arrow-up">Back to Top</span></div>
-
-	<button ng-hide="totalCount<=maxQuestion"
-	class="pull-right btn btn-default glyphicon glyphicon-arrow-down"
-	type="button" ng-click="increaseMax()"> Show more</button>
 -->
-
-
-
 <!-- Autolink from https://github.com/gregjacobs/Autolinker.js> -->
 <script src="js/lib/Autolinker.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
