@@ -302,7 +302,7 @@ $scope.addTodo = function () {
 	var newTodo_nt = res[0];
 	var tags = res[1];
 	
-	if (!newTodo.length) {
+	if (!newTodo_nt.length) {
 		return;
 	}
 	
