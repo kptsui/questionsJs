@@ -15,6 +15,7 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window) {
 		$scope.isSignUpFormShow = false;
 	}
 	else{
+		$scope.userName = "";
 		$scope.isSignUpFormShow = true;
 	}
 	
@@ -105,20 +106,20 @@ return(FormatNumberLength(hours,2) + ':' + FormatNumberLength(minutes,2));
 function timeInterpreter(res_date){
 	var output = "";
 	var now = new Date();
-	if (res_date > now.getTime())
-		output = "Time traveller! - " + dateConverter(res_date, now) + " at " + timeConverter(res_date);
-	else if (res_date > now.getTime() - 60 * 1000) // 1 min
+	//if (res_date > now.getTime())
+		//output = "Time traveller! - " + dateConverter(res_date, now) + " at " + timeConverter(res_date);
+	if (res_date > now.getTime() - 60 * 1000) // 1 min
 	{
 		output = Math.round((now-res_date)/1000);
 		if (output == 0)
 			output = "just posted";
 		else
-			output += " s";
+			output += " s ago";
 	}
 	else if (res_date > now.getTime() - 60 * 60 * 1000) // 1 hour
-		output = Math.round((now-res_date)/(60000)) + " mins"
+		output = Math.round((now-res_date)/(60000)) + " mins ago"
 	else if (res_date > now.getTime() - 24 * 60 * 60 * 1000) // 1 day
-		output = Math.round((now-res_date)/(3600000)) + " hrs"
+		output = Math.round((now-res_date)/(3600000)) + " hrs ago"
 	else if (res_date.getMonth() == now.getMonth())
 		output = dateConverter(res_date, now) + " at " + timeConverter(res_date);
 	else
@@ -200,8 +201,20 @@ $scope.addComment = function(form, todo) {
 };
 
 $scope.signUp = function(){
-	localStorage.setItem("userNameInQJS", $scope.userName);
-	return false;
+	if ($scope.userName)
+	{
+		localStorage.setItem("userNameInQJS", $scope.userName);
+		return false;
+	}
+	else
+		return true;
+	//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
+	//$scope.$apply();
+};
+
+$scope.signOut = function(){
+	$scope.userName = "";
+	return true;
 	//$scope.$apply will trigger a digest loop which will make Angular notice that $scope.isSignUpFormShow has changed.
 	//$scope.$apply();
 };
@@ -289,7 +302,7 @@ $scope.addTodo = function () {
 	var newTodo_nt = res[0];
 	var tags = res[1];
 	
-	if (!newTodo.length) {
+	if (!newTodo_nt.length) {
 		return;
 	}
 	
@@ -299,6 +312,7 @@ $scope.addTodo = function () {
 
 	var userName = $scope.userName;
 	newTodo = userName + " " + newTodo;
+	userName = userName?userName:'annoymous';
 	//****************************************
 	//****************************************
 	var position;
@@ -387,6 +401,17 @@ $scope.minusEcho = function (todo) {
 	//$scope.$storage[todo.$id] = "echoed";
 };
 
+$scope.showLike = function (id){
+	if ($scope.$storage[id] == "echoed")
+		return true;
+	return false;
+}
+
+$scope.showDislike = function (id){
+	if ($scope.$storage[id] == "d_echoed")
+		return true;
+	return false;
+}
 
 $scope.doneEditing = function (todo) {
 	$scope.editedTodo = null;
@@ -426,6 +451,13 @@ $scope.markAll = function (allCompleted) {
 		$scope.todos.$save(todo);
 	});
 };
+
+$scope.thisIsMine = function(op){
+	if (op==$scope.userName)
+		return '2px solid #49C7C3';
+	else
+		return 'none';
+}
 
 $scope.FBLogin = function () {
 	if (!noFB)
@@ -477,9 +509,9 @@ $scope.location = $location;
 // autoscroll
 angular.element($window).bind("scroll", function() {
 	if ($window.innerHeight + $window.scrollY >= $window.document.body.offsetHeight) {
-		console.log('Hit the bottom2. innerHeight' +
-		$window.innerHeight + "scrollY" +
-		$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
+		//console.log('Hit the bottom2. innerHeight' +
+		//$window.innerHeight + "scrollY" +
+		//$window.scrollY + "offsetHeight" + $window.document.body.offsetHeight);
 
 		// update the max value
 		$scope.increaseMax();

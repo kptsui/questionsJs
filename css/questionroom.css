@@ -25,7 +25,7 @@
 	border:0;
 	background-color: rgba(0%,0%,0%,0);
 	color: #777;
-	font-size: 130%;
+	font-size: 180%;
 }
 .btn-no-outline:focus{
 	outline: none !important;
@@ -36,13 +36,16 @@
 	height:30px; 
 	background-color:#327AC0; 
 	color: #FFF; 
-	border:0
+	border:0;
 }
 .questionBlock{
 	position:relative; 
 	width:100%;
 	margin:0;
 	padding:0;
+}
+.commentName{
+	color:#327AC0;
 }
 .stringTime{
 	margin: 0 10px;
@@ -51,16 +54,9 @@
 	padding: 10px 10px 0;
 	width:100%;
 }
-.btnNav{
-	display:inline-block; 
-	width:80px; 
-	padding:3px 0; 
-	margin:0 0 5px 10px; 
-	background: rgba(0%,0%,0%,0);
-	color: #555;
-	font-size: 120%;
+.btnNav{ 
+	width:45px; 
 }
-.btnNav:hover{
-	text-decoration: underline !important;
-	color: #3860C4 !important;
+.btnNav-long{
+	width:90px;
 }

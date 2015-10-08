@@ -1,0 +1,49 @@
+Length	: 100000
+Bubble Sort	: 33.2741 sec
+Insertion Sort	: 0.000489 sec
+Quick Sort	: 7.24795 sec
+
+Length	: 100000
+Bubble Sort	: 15.2635 sec
+Insertion Sort	: 0.000488 sec
+Quick Sort	: 7.30776 sec
+
+Length	: 200000
+Bubble Sort	: 114.658 sec
+Insertion Sort	: 0.000936 sec
+Quick Sort	: 19.9465 sec
+
+Length	: 300000
+Bubble Sort	: 227.515 sec
+Insertion Sort	: 0.001402 sec
+Quick Sort	: 33.1311 sec
+
+Length	: 400000
+Bubble Sort	: 371.013 sec
+Insertion Sort	: 0.001985 sec
+Quick Sort	: 45.5612 sec
+
+Length	: 500000
+Bubble Sort	: 544.005 sec
+Insertion Sort	: 0.002342 sec
+Quick Sort	: 57.2863 sec
+
+Length	: 600000
+Bubble Sort	: 751.573 sec
+Insertion Sort	: 0.002892 sec
+Quick Sort	: 71.3093 sec
+
+Length	: 700000
+Bubble Sort	: 991.003 sec
+Insertion Sort	: 0.003228 sec
+Quick Sort	: 81.4635 sec
+
+Length	: 800000
+Bubble Sort	: 1256.6 sec
+Insertion Sort	: 0.003676 sec
+Quick Sort	: 93.1104 sec
+
+Length	: 900000
+Bubble Sort	: 1536.43 sec
+Insertion Sort	: 0.004129 sec
+Quick Sort	: 103.443 sec
