@@ -66,7 +66,7 @@ a:focus {
     border-bottom: 1px solid rgba(255,255,255,.3);
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: #000;
+    background-color: #fff;
 }
 
 .navbar-custom .navbar-brand {
@@ -89,7 +89,7 @@ a:focus {
 }
 
 .navbar-custom a {
-    color: #fff;
+    color: #000;
 }
 
 .navbar-custom .nav li a {
@@ -136,7 +136,7 @@ a:focus {
     .navbar-custom.top-nav-collapse {
         padding: 0;
         border-bottom: 1px solid rgba(255,255,255,.3);
-        background: #000;
+        background: #fff;
     }
 }
 
@@ -393,17 +393,15 @@ a:focus {
 }
 
 .btn-default {
-    border: 1px solid #42dca3;
-    color: #42dca3;
-    background-color: transparent;
+    color: #ffffff;
+    background-color: #FFC575;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #42dca3;
-    outline: 0;
-    color: #000;
-    background-color: #42dca3;
+	border:0;
+    color: #fff;
+    background-color: #FFE9CA;
 }
 
 ul.banner-social-buttons {
@@ -466,10 +464,10 @@ body {
 	position: absolute;
 	margin: 0;
 	padding: 0;
-	color: #f9f1e9;
-	text-align: left;
+	color: #ffffff;
+	text-align: center;
 	top: 60%;
-	left: 35%;
+	left: 50%;
 	-webkit-transform: translate3d(-50%,-50%,0);
 	transform: translate3d(-50%,-50%,0);
 	font-size: 500%;
