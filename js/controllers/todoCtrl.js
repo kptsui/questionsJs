@@ -179,7 +179,7 @@ $scope.addComment = function(form, todo) {
 		form.name = $scope.userName;
 
 		var date = new Date();
-		var time = date.getHours() + ":" + date.getMinutes() + " " + date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear();
+		var time = date.getHours() + ":" + date.getMinutes() + " " + date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
 		form.dateString = time;
 
 		if(todo.hasOwnProperty("comments")){
