@@ -1,43 +1,79 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en"  ng-app="app">
+
 <head>
-   	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="icon" href="../../favicon.ico">
 
-	<title>Question Room</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <title>Question Room</title>
 
-	<!-- Custom styles for this template -->
-	<link href="css/cover.css" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:200,400,800|Clicker+Script' rel='stylesheet' type='text/css'>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
-<body ng-controller="controller">
-	<div class="site-wrapper">
-		<div class="site-wrapper-inner">
-			<div class="cover-container">
-				<div class="masthead clearfix">
-					<div class="inner">
-						<h3 class="masthead-brand">Question Room</h3>
-						<nav>
-							<ul class="nav masthead-nav">
-								<li class="active"><a href="index.html">Home</a></li>
-								<li><a href="features.html">Features</a></li>
-								<li><a href="contact.html">Contact</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
 
-				<div class="inner cover">
-					<h1 class="cover-heading">Ask More Questions!</h1>
-					<p class="lead">This totally anonymous and real-time updating question moderated system permits students to ask more questions in a typical class setting.
-						Simply join a question room using a simple name (such as comp3111).</p>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top"  ng-controller="controller">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="./index.html">
+                    <i class="fa fa-play-circle"></i>  <span class="light">Question</span></a>
+					<a class="navbar-brand page-scroll" href="#page-top">Room
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#home">Home</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#feature">Feature</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div id="large-header">
+							<canvas id="canvas" ></canvas>
+								<div class="main-title">
+									<h1 style="font-size:100%">Ask. Here</h1>
 						<p class="lead" class="col-md-2 col-md-offset-5">
 							<form name="form" ng-submit="join()" class="navbar-form navbar-left" role="search">
 								<input type="text" name = "input" class="form-control large"
@@ -48,42 +84,62 @@
 								aria-describedby="sizing-addon1"
 								placeholder="Room name">
 								<a href="#" class="btn btn-lg btn-default"
-								ng-hide="form.input.$error.required || form.input.$error.pattern"
 								ng-click="join()"
 								>Join</a>
 							</form>
 						</p>
 
-						<div class="alert alert-warning" role="alert" ng-show="form.input.$error.required">
-							Room name is required!</div>
-							<div class="alert alert-warning" role="alert" ng-show="form.input.$error.pattern">
-								Room name must be a single English word!
-							</div>
+
 
 						</div>
+									
+									
+								</div>
+            </div>
+        </div>
+    </header>
 
-						<div class="mastfoot">
-							<div class="inner">
-								<p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-							</div>
-						</div>
+    <!-- Feature Section -->
+    <section id="feature" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Feature</h2>
+				<p>Should be some feature here</p>
+                <p>...</p> 
+				<p>...</p>
+            </div>
+        </div>
+    </section>
 
-					</div>
 
-				</div>
 
-			</div>
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; love!sung</p>
+        </div>
+    </footer>
 
-			<!-- Bootstrap core JavaScript
-			================================================== -->
-			<!-- Placed at the end of the document so the pages load faster -->
-			<script src="js/lib/jquery.min.js"></script>
-			<script src="js/lib/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-			<!-- 1.4.2 -->
-			<script src="js/lib/angular.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
-			<script>
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+	
+	        <script src="js/rAF.js"></script>
+        <script src="js/canvas.js"></script>
+		
+					<!-- 1.4.2 -->
+			<script src="js/angular.min.js"></script>
+			
+		<script>
 			angular.module('app', [])
 			.controller('controller', ['$scope', '$location', '$window', function($scope, $location, $window) {
 				$scope.example = {
@@ -96,5 +152,7 @@
 				}
 			}]);
 			</script>
-		</body>
-		</html>
+
+</body>
+
+</html>

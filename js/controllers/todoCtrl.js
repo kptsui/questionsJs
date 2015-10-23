@@ -322,13 +322,32 @@ $scope.addTodo = function () {
 	else{
 		position = -1 - $scope.todos.length;
 	}
+	
+	//var linkedDesc = Autolinker.link(desc, {newWindow: false, stripPrefix: false, truncate: 25});
+	
+	var linkedDesc = Autolinker.link( desc, {newWindow: false, stripPrefix: false, truncate: 25,
+    replaceFn : function( autolinker, match ) {
+        console.log( "href = ", match.getAnchorHref() );
+        console.log( "text = ", match.getAnchorText() );
+        switch( match.getType() ) {
+            case 'url' :
+                console.log( "url: ", match.getUrl() );
+                if( match.getUrl().indexOf( 'https://www.youtube.com/watch?v=' ) == 0 ) {
+                    return false;
+
+                } else {
+                    return true;  // let Autolinker perform its normal anchor tag replacement
+                }
+        }
+    }
+} );
 	//****************************************
 	$scope.todos.$add({
 		wholeMsg: newTodo,
 		head: head,
 		headLastChar: head.slice(-1),
 		desc: desc,
-		linkedDesc: Autolinker.link(desc, {newWindow: false, stripPrefix: false}),
+		linkedDesc: linkedDesc,
 		completed: false,
 		timestamp: new Date().getTime(),
 		tags: tags,
