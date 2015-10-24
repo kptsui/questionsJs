@@ -472,6 +472,10 @@ body {
 	transform: translate3d(-50%,-50%,0);
 	font-size: 500%;
 }
+.main-title h1{
+	font-size:100%;
+	text-shadow: 1px 1px white, -1px -1px #444;
+}
 .gallery-title {
 	font-family: 'Clicker Script', cursive;
 	font-weight: normal;
