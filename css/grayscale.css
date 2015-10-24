@@ -464,7 +464,7 @@ body {
 	position: absolute;
 	margin: 0;
 	padding: 0;
-	color: #ffffff;
+	color: #f3f3f3;
 	text-align: center;
 	top: 60%;
 	left: 50%;
@@ -476,12 +476,13 @@ body {
 	font-size:100%;
 	text-shadow: 1px 1px white, -1px -1px #444;
 }
-.gallery-title {
-	font-family: 'Clicker Script', cursive;
-	font-weight: normal;
-	font-size: 8em;
-	padding-left: 10px;
-	text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-	text-transform: capitalize;
-	text-align: center;
+.featureList {
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	list-style-type: none;
+	text-align:center;
+	font-size: 130%;
+	margin-bottom:50px;
+}
+.featureList li{
+	margin-bottom:10px;
 }
