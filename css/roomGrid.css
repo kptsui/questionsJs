@@ -2,5 +2,16 @@
 }
 
 .roomItem{
-	margin-top: 20px;
+
+	color: #555;
+	background-color:#fff;
+	width:130px;
+	height:130px;
+	margin:5px;
+	border-radius: 3px;
+	font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.roomItem:hover{
+	color: #555;
+	background-color:#FFE9CA;
 }
