@@ -257,7 +257,10 @@ $scope.clearMsg = function() {
 // update msg string to tag string for quick tag search
 $scope.tagToMsg = function($tag) {
 	try{
-	var Msg = $scope.input.wholeMsg + " " +$tag;
+		if ($scope.input.wholeMsg.trim())
+			var Msg = $scope.input.wholeMsg.trim() + " " +$tag;
+		else
+			var Msg = $tag;
 	}
 	catch(e){
 		var Msg = $tag;
