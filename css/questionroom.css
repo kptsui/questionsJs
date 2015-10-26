@@ -12,7 +12,6 @@
 	position:absolute; 
 	bottom:1px; 
 	right:0px;
-	height:
 }
 .inputClear{
 	position:absolute;
@@ -37,6 +36,18 @@
 	background-color:#327AC0; 
 	color: #FFF; 
 	border:0;
+}
+.btnTag{
+	height:30px; 
+	background-color:#fff; 
+	color: #333; 
+	border: 1px solid #e3e3e3;
+	margin: 5px 5px;
+	padding: 0 10px;
+}
+.btnTag:hover{
+	background-color:#408FB2; 
+	color: #FFF; 
 }
 .questionBlock{
 	position:relative; 
