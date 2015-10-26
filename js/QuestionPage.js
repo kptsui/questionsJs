@@ -11,7 +11,7 @@ $(document).ready(function(){
 		var courseType = roomName.substring(0,4).toLowerCase();
 		var icon = '<img src="img/'+courseType+'.png" alt="course icon" class="rmBlock">';
 
-		var stringToAppend = '<a class="col-xs-12 roomItem" href="'+hyperLink+'">'+icon+roomName.toUpperCase()+'</a>';
+		var stringToAppend = '<a class="col-xs-12 roomItem" href="'+hyperLink+'" onclick="location.reload();">'+icon+roomName.toUpperCase()+'</a>';
 
 		roomGrid.append(stringToAppend);
 	});
