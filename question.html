@@ -106,11 +106,14 @@
 	</nav>
 
 	<div class="container">
-
+	<div class="col-lg-9">
 	<div class="inputBox" >
 		<textarea type="text" id="new-todo" class="form-control "
 		placeholder="Search or Post Question"
 		ng-model="input.wholeMsg" style="height:100px" autofocus></textarea>
+		
+
+		
 		<div class="inputClear">
 			<button ng-show="input.wholeMsg" class="btnClear btn-no-outline" ng-click="clearMsg()">
 			<i class=" fa fa-times-circle"></i>
@@ -121,8 +124,15 @@
 		</div>
 	</div><!-- /input-group -->
 
-<br><br>
-
+	<div class="container" style="margin-top:10px;">
+	<label>Hot Tag: </label>
+	 search by tag or add tag
+	<br>
+			<button class="btnTag" ng-click="tagToMsg('#Assignment')"> Assignment</button>
+			<button class="btnTag" ng-click="tagToMsg('#Final')"> Final</button>
+			<button class="btnTag" ng-click="tagToMsg('#Mid-term')"> Mid-term</button>
+			
+	</div>
 
 	<div class="list-group" id="todo-list">
 		<div
@@ -221,9 +231,17 @@
 
 		</div>	
 	</div>
-
 	</div>
-	
+	<div class="rightContainer col-lg-3 ">
+	<br><br><br>
+	<div class="container-fluid" style="background-color:#fff">
+	<h3> Hot Room</h3>
+	<div id="roomList" class="row text-center">
+    </div>
+	</div>
+	</div>
+	</div>
+
 	
 </div>
 <!--
@@ -251,5 +269,6 @@
 <script src="js/directives/todoFocus.js"></script>
 <script src="js/directives/todoBlur.js"></script>
 <script src="js/directives/todoEscape.js"></script>
+<script src="js/QuestionPage.js">></script>
 </body>
 </html>

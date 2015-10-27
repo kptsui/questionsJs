@@ -27,6 +27,15 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
+    'js/canvas.js',
+    'js/grayscale.js',
+    
+    'js/angular.min.js',
+    'js/bootstrap.min.js',
+    'js/jquery.easing.min.js',
+    'js/jquery.js',
+    'js/rAF.js'
+    
     ],
 
 
