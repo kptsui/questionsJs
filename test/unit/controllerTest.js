@@ -87,5 +87,168 @@ describe('TodoCtrl', function() {
         expect(window.scrollX).toBe(0);
         expect(window.scrollY).toBe(0);
       });
+      it('toTop Testing', function() {
+
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $location: location,
+          $firebaseArray: firebaseArray,
+          $sce: sce,
+          $localStorage: localStorage,
+          $window: window
+        });
+        scope.toTop();
+        expect(window.scrollX).toBe(0);
+        expect(window.scrollY).toBe(0);
+      });
+
+      it('addEcho', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.$storage[abc]="";
+        var abc = [];
+        abc.push({"echo":0,"like": false});
+        scope.addEcho(abc[0]);
+        expect(abc[0].echo).toBe(1);
+        expect(abc[0].like).toBe(true);
+      });
+      it('addEcho', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.$storage[abc]="echoed";
+        var abc = [];
+        abc.push({"echo":2,"like": true});
+        scope.addEcho(abc[0]);
+        expect(abc[0].echo).toBe(1);
+        expect(abc[0].like).toBe(false);
+      });
+      it('addEcho', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.$storage[abc]="d_echoed";
+        var abc = [];
+        abc.push({"echo":2,"like": false});
+        scope.addEcho(abc[0]);
+        expect(abc[0].echo).toBe(2);
+        expect(abc[0].like).toBe(false);
+      });
+
+            it('minusEcho', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.$storage[abc]="d_echoed";
+        var abc = [];
+        abc.push({"d_echo":2,"dislike": true});
+        scope.minusEcho(abc[0]);
+        expect(abc[0].d_echo).toBe(1);
+        expect(abc[0].dislike).toBe(false);
+      });
+            it('minusEcho', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.$storage[abc]="echoed";
+        var abc = [];
+        abc.push({"d_echo":2,"dislike": false});
+        scope.minusEcho(abc[0]);
+        expect(abc[0].d_echo).toBe(2);
+        expect(abc[0].dislike).toBe(false);
+      });
+            it('minusEcho', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.$storage[abc]="";
+        var abc = [];
+        abc.push({"d_echo":2,"dislike": false});
+        scope.minusEcho(abc[0]);
+        expect(abc[0].d_echo).toBe(3);
+        expect(abc[0].dislike).toBe(true);
+      });
+            it('showLike', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        var no1=10;
+        var no2=20;
+
+        scope.$storage[10]="echoed";
+        scope.$storage[20]="something";
+        expect(scope.showLike(no1)).toBe(true);
+        expect(scope.showLike(no2)).toBe(false);
+
+      });
+
+            it('showDislike', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        var no1=10;
+        var no2=20;
+
+        scope.$storage[10]="d_echoed";
+        scope.$storage[20]="something";
+        expect(scope.showDislike(no1)).toBe(true);
+        expect(scope.showDislike(no2)).toBe(false);
+
+      });
+            it('editTodo', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        var abc = 10;
+        scope.editTodo(abc);
+        expect(scope.editedTodo).toBe(10);
+
+      });
+            it('doneEditing', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        //  scope.todos = [];
+        var abc = [];
+        abc.push({"wholeMsg":"test"});
+        scope.doneEditing(abc[0]);
+        expect(scope.todos.$save(abc[0]));
+
+      });
+            it('doneEditing', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        //  scope.todos = [];
+        var abc = [];
+        abc.push({"wholeMsg":""});
+        scope.doneEditing(abc[0]);
+        expect(scope.removeTodo(abc[0]));
+
+      });
+             it('revertEditing', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        
+        var abc = [];
+        abc.push({"wholeMsg":"test"});
+        scope.originalTodo = {wholeMsg: "revert"};
+        scope.revertEditing(abc[0]);
+        expect(abc[0].wholeMsg).toBe("revert");
+
+      });
+             it('clearCompletedTodos', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        
+        var abc = [];
+
+
+      });
+
+       
     });
   });
