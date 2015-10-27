@@ -80,7 +80,7 @@
 									<h1>Ask. Here</h1>
 						
 							<form name="form" ng-submit="join()" role="search">
-								<input type="text" name = "input" class="form-control large"
+								<input type="text" name = "input" class="form-control large" id = "inputRoomName"
 								ng-model="example.text"
 								ng-pattern="example.word" required
 								ng-trim="false"
@@ -214,7 +214,30 @@
 				};
 
 				$scope.join = function () {
-					$window.location.href = 'question.html#/' + $scope.example.text;
+                    var validName = ["acct", "comp", "huma", "chem", "hlth"];
+                    var inputStr = "" + $("#inputRoomName").val();
+                    var inputPrefix = inputStr.substring(0,4).toLowerCase();
+                    var inputSubfix = inputStr.substring(4);
+                    var isPrefixValid = false;
+                    var isSubfixValid = false;
+
+                    if(inputStr.length == 8 && inputPrefix.length == 4){
+                        for(var i=0; i < inputStr.length; ++i){
+                            if(inputPrefix.indexOf(validName[i]) != -1){
+                                isPrefixValid = true;
+                                break;
+                            }
+                        }
+                        isSubfixValid = !isNaN(inputSubfix);
+                    }
+
+                    if(isPrefixValid && isSubfixValid)
+                            $window.location.href = 'question.html#/' + $scope.example.text;
+                    else{
+                       $("#inputRoomName").val("");
+                        alert("Sorry, room name is not support yet!\n\nMake sure your input format is like: comp3111\n\nWe support acct, comp, huma, chem, hlth for now!");
+                    }
+
 				}
 			}]);
 			</script>
