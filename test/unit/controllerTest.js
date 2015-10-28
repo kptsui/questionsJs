@@ -51,7 +51,8 @@ describe('TodoCtrl', function() {
           {str:"Hello.co? This is Sung", exp: "Hello.co?"},
           {str:"Hello.co This is Sung", exp: "Hello.co This is Sung"},
           {str:"Hello.co \nThis is Sung", exp: "Hello.co \n"},
-
+          {str:"Hello? ! ", exp: "Hello?"},
+          {str:"Hello! ? ", exp: "Hello!"},
           {str:"Hello?? This is Sung", exp: "Hello??"},
         ];
 
@@ -245,10 +246,107 @@ describe('TodoCtrl', function() {
         });
         
         var abc = [];
+        abc.push({ "completed": true, "dateString": "", "desc": "", "echo": 1, "head": "test", "headLastChar": "t", "linkedDesc": "", "new": false, "order": -1, "timestamp": 1442673711706, "trustedDesc": "", "wholeMsg": "test", "$id": "-Jza2SbF6TLvuS9vq90t", "$priority": null, "tags": null, "$$hashKey": "object:6" });
+        scope.todos.push(abc[0]);
+        scope.originalTodo = {wholeMsg:"sample input"};
+        scope.clearCompletedTodos(abc[0]);
+        expect(scope.removeTodo(abc[0])).toBe();
 
+      });
+             it('toggleCompleted', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        
+        var abc = [];
+        abc.push({"completed":true});
+        scope.toggleCompleted(abc[0]);
+        expect(abc[0].completed).toBe(false);
 
       });
 
-       
+
+      it('thisIsMine', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        var op1 = "name";
+        var op2 = "abc";
+        scope.userName = "name";
+        expect(scope.thisIsMine(op1)).toBe("2px solid #49C7C3");
+        expect(scope.thisIsMine(op2)).toBe("none");
+      });
+      it('FBLogin', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.noFB = true;
+        var abc = [];
+        abc.push({"isAdmin": false});
+        scope.FBLogin(abc[0]);
+        expect(abc[0].isAdmin).toBe(false);
+      });
+      it('FBLogout', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.noFB = true;
+        var abc = [];
+        abc.push({"isAdmin": false});
+        scope.FBLogout(abc[0]);
+        expect(abc[0].isAdmin).toBe(false);
+      });
+
+      it('increaseMax', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.maxQuestion = 10;
+        scope.totalCount = 1;
+        scope.increaseMax();
+        expect(scope.maxQuestion).toBe(10);
+
+      });
+      it('increaseMax', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.maxQuestion = 10;
+        scope.totalCount = 11;
+        scope.increaseMax();
+        expect(scope.maxQuestion).toBe(20);
+
+      });
+      it('addTodo', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:"sample input"};
+        scope.addTodo();
+        scope.input = {wholeMsg:""};
+        scope.addTodo();
+        expect(scope.todos.length).toBe(0);      
+      });      
+      it('tagToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:"sample input"};
+        var tag = "#123";
+        scope.tagToMsg(tag);
+        expect(scope.input.wholeMsg).toBe("sample input #123");
+      });       
+      it('tagToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:""};
+        var tag = "#123";
+        scope.tagToMsg(tag);
+        expect(scope.input.wholeMsg).toBe("#123");
+      });               
     });
   });

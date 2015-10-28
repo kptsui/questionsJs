@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for js/mainPage.js</title>
+    <title>Code coverage report for js/QuestionPage.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">all files</a> / <a href="index.html">js/</a> mainPage.js
+      <a href="../index.html">all files</a> / <a href="index.html">js/</a> QuestionPage.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -78,7 +78,7 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">$(document).ready(function(){
-	var roomGrid = $("#roomGrid");
+	var roomGrid = $("#roomList");
 	var baseLink = "http://52.88.196.231/chat/question.html#/";
 &nbsp;
 	var ref = new Firebase("https://intense-torch-3848.firebaseio.com/");
@@ -90,7 +90,7 @@
 <span class="cstat-no" title="statement not covered" >		var courseType = roomName.substring(0,4).toLowerCase();</span>
 <span class="cstat-no" title="statement not covered" >		var icon = '&lt;img src="img/'+courseType+'.png" alt="course icon" class="rmBlock"&gt;';</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >		var stringToAppend = '&lt;a class="col-xs-3 roomItem" href="'+hyperLink+'"&gt;&lt;br&gt;'+icon+'&lt;br&gt;'+roomName.toUpperCase()+'&lt;/a&gt;';</span>
+<span class="cstat-no" title="statement not covered" >		var stringToAppend = '&lt;a class="col-xs-12 roomItem" href="'+hyperLink+'" onclick="location.reload();"&gt;'+icon+roomName.toUpperCase()+'&lt;/a&gt;';</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >		roomGrid.append(stringToAppend);</span>
 	});
