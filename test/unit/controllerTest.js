@@ -391,6 +391,26 @@ describe('TodoCtrl', function() {
         expect(scope.userName).toBe("");
 
       });
+     it('watchCollection1', function() {
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+        });
+    var todoText = [];
+    todoText.push({ "completed": false, "dateString": "", "desc": "", "echo": 1, "head": "test", "headLastChar": "t", "linkedDesc": "", "new": false, "order": -1, "timestamp": 1442673711706, "trustedDesc": "", "wholeMsg": "test", "$id": "-Jza2SbF6TLvuS9vq90t", "$priority": null, "tags": null, "$$hashKey": "object:6" });
+    todoText.push({ "completed": true, "dateString": "", "desc": "", "echo": 1, "head": "test", "headLastChar": "t", "linkedDesc": "", "new": false, "order": -1, "timestamp": 1442673711706, "trustedDesc": "", "wholeMsg": "test", "$id": "-Jza2SbF6TLvuS9vq90t", "$priority": null, "tags": null, "$$hashKey": "object:6" });
+    todoText.push({completed: false,dataString: '',desc: 'This is david not sung',echo: 0,head: 'hello!',headLastChar: '?', linkedDesc: 'This is david not sung',new: false,order: '0',timestamp: '1442591162593',wholeMsg: ''});
+    scope.todos = [];
+    scope.todos.push(todoText[0]);
+    scope.todos.push(todoText[1]);
+    scope.todos.push(todoText[2]);
+    scope.todos.push({});
+    scope.$apply();
+    expect(scope.todos[0].dateString).not.toBe();
+    expect(scope.todos[1].dateString).not.toBe();
+    expect(scope.todos[2].dateString).not.toBe();
+    expect(scope.totalCount).toBe(3);
+    expect(scope.remainingCount).toBe(2);
+      });  
 
     });
   });
