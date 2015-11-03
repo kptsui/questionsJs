@@ -347,6 +347,50 @@ describe('TodoCtrl', function() {
         var tag = "#123";
         scope.tagToMsg(tag);
         expect(scope.input.wholeMsg).toBe("#123");
-      });               
+      });
+      it('changeOrder', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        var pre = '';
+        scope.changeOrder(pre);
+        expect(scope.predicate).toBe('');
+
+      });
+      it('changeOrder', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        var pre = '123';
+        scope.changeOrder(pre);
+        expect(scope.predicate).toBe('123');
+
+      });
+      it('signUp', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        scope.userName = "";
+        expect(scope.signUp()).toBe(true);
+
+      });
+      it('signUp', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        scope.userName = "leo";
+        expect(scope.signUp()).toBe(false);
+
+      });
+      it('signOut', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        scope.userName = "leo";
+        expect(scope.signOut()).toBe(true);
+        expect(scope.userName).toBe("");
+
+      });
+
     });
   });
