@@ -13,6 +13,11 @@
 	bottom:1px; 
 	right:0px;
 }
+.inputImgUpload{
+	position:absolute; 
+	bottom:1px; 
+	right:150px;
+}
 .inputClear{
 	position:absolute;
 	bottom:50px;
@@ -34,6 +39,13 @@
 	width: 150px; 
 	height:30px; 
 	background-color:#327AC0; 
+	color: #FFF; 
+	border:0;
+}
+.btnImgUpload{
+	width: 100px; 
+	height:30px; 
+	background-color:#28C783; 
 	color: #FFF; 
 	border:0;
 }
@@ -96,4 +108,32 @@
 	width:25px;
 	height:25px;
 	margin: 0 30px;
+}
+.imgUpload{
+	box-sizing: border-box;
+	background-color:#fff;
+	padding:10px;
+}
+.fileinput-button{
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px;
+  direction: ltr;
+  cursor: pointer;
+}
+.progress-bar{
+	color: 268CA7;
+}
+.imgFrame{
+    max-width:600px; 
+    height:auto
 }
