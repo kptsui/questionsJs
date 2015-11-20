@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var roomGrid = $("#roomList");
-	var baseLink = "http://52.88.196.231/chat/question.html#/";
+	var currentLink  = window.location.href;
+	var baseLink = currentLink.substr(0, currentLink.indexOf("#/")+2);
 
 	var ref = new Firebase("https://intense-torch-3848.firebaseio.com/");
 	ref.orderByKey().on("child_added", function(snapshot) {
