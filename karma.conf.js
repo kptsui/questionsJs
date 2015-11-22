@@ -29,6 +29,8 @@ module.exports = function(config) {
     exclude: [
     'js/canvas.js',
     'js/grayscale.js',
+    'js/jquery.emojipicker.js',
+    'js/jquery.emojipicker.a.js',
     
     'js/angular.min.js',
     'js/bootstrap.min.js',
