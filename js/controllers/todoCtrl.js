@@ -350,15 +350,18 @@ $scope.addTodo = function () {
 	
 	var linkedDesc = Autolinker.link( desc, {newWindow: false, stripPrefix: false, truncate: 25,
     replaceFn : function( autolinker, match ) {
-        console.log( "href = ", match.getAnchorHref() );
-        console.log( "text = ", match.getAnchorText() );
         switch( match.getType() ) {
             case 'url' :
-                console.log( "url: ", match.getUrl() );
-                if( match.getUrl().indexOf( 'https://www.youtube.com/watch?v=' ) == 0 || match.getUrl().indexOf( 'www.youtube.com/watch?v=' ) == 0) {
+                //console.log( "url: ", match.getUrl() );
+				var link = match.getUrl();
+				var ext = link.substr(link.lastIndexOf('.') + 1);
+				if (youtube_parser(link)){
                     return false;
-
-                } else {
+                } else if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "bmp" || ext == "gif"){
+					return '<img class="imgFrame" src="'+link+'">';
+				}
+				else
+				{
                     return true;  // let Autolinker perform its normal anchor tag replacement
                 }
         }
@@ -550,6 +553,8 @@ $scope.btnImgUpload = function () {
 };
 
 $scope.parse = function(desc) {
+	if (desc)
+	{
 	desc = desc.trim();
 	var n_string = "";
 	var line = desc.split("\n");
@@ -569,6 +574,8 @@ $scope.parse = function(desc) {
 			n_string += "\n";
 	}
 	return n_string;
+	}
+	return desc;
 }
 
 function youtube_parser(url){
@@ -632,6 +639,10 @@ angular.element($window).bind("scroll", function() {
         };
         uploader.onSuccessItem = function(fileItem, response, status, headers) {
             console.info('onSuccessItem', fileItem, response, status, headers);
+			
+			//$scope.item.file.name = response.filename;
+			//$scope.uploader = {filename: response.filename}; //this is bug
+			//console.log($scope.uploader);
         };
         uploader.onErrorItem = function(fileItem, response, status, headers) {
             console.info('onErrorItem', fileItem, response, status, headers);
