@@ -165,6 +165,7 @@ $scope.$watchCollection('todos', function () {
 		//todo.tags = todo.wholeMsg.match(/#\w+/g);
 
 		//todo.trustedDesc = $sce.trustAsHtml(todo.linkedDesc);
+		//todo.linkedDesc = todo.linkedDesc + "test";
 	});
 
 	$scope.totalCount = total;
@@ -275,12 +276,12 @@ $scope.imgToMsg = function($url) {
 	var url = '<img class="imgFrame" src="uploads/'+$url+'">';
 	try{
 		if ($scope.input.wholeMsg.trim())
-			var Msg = $scope.input.wholeMsg.trim() + " " +url;
+			var Msg = $scope.input.wholeMsg.trim() + "\n" +url;
 		else
-			var Msg = url;
+			var Msg = "img upload" + "\n" +url;
 	}
 	catch(e){
-		var Msg = url;
+		var Msg = "img upload" + "\n" +url;
 	}
 	$scope.input = {wholeMsg: Msg};
 }
@@ -306,10 +307,6 @@ $scope.getTags = function($string){
 		if (n_string!="")
 			n_string += "\n";
 	}
-	/*
-	if (tags.length == 0)
-		tags[0] = "...";
-	*/
 	
 	return [n_string, tags];
 }
@@ -358,7 +355,7 @@ $scope.addTodo = function () {
         switch( match.getType() ) {
             case 'url' :
                 console.log( "url: ", match.getUrl() );
-                if( match.getUrl().indexOf( 'https://www.youtube.com/watch?v=' ) == 0 ) {
+                if( match.getUrl().indexOf( 'https://www.youtube.com/watch?v=' ) == 0 || match.getUrl().indexOf( 'www.youtube.com/watch?v=' ) == 0) {
                     return false;
 
                 } else {
@@ -552,6 +549,33 @@ $scope.btnImgUpload = function () {
 		$scope.imgUpload = true;
 };
 
+$scope.parse = function(desc) {
+	desc = desc.trim();
+	var n_string = "";
+	var line = desc.split("\n");
+	for (var l in line)
+	{
+		line[l].trim();
+		var res = line[l].split(" ");
+		for (var i in res)
+		{
+			var out = youtube_parser(res[i]);
+			if (out)
+				n_string += '<iframe id="ytplayer" type="text/html" width="640" height="390" src="http://www.youtube.com/embed/' + out + '?autoplay=0" frameborder="0"/> ';
+			else
+				n_string += res[i]+" ";
+		}
+		if (n_string!="")
+			n_string += "\n";
+	}
+	return n_string;
+}
+
+function youtube_parser(url){
+    var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    return (match&&match[7].length==11)? match[7] : false;
+}
 
 // Not sure what is this code. Todel
 if ($location.path() === '') {
