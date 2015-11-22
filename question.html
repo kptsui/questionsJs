@@ -22,6 +22,8 @@
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/preload.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.a.css">
 </head>
 
 <body ng-controller="TodoCtrl" id="TodoCtrl" class="body">
@@ -106,8 +108,8 @@
 
 	<div class="container">
 	<div class="col-lg-9">
-	<div class="inputBox" >
-		<textarea type="text" id="new-todo" class="form-control textarea-control"
+	<div class="inputBox field" >
+		<textarea type="text" id="new-todo" class="form-control textarea-control emojiable-question"
 		placeholder="Search or Post Question"
 		ng-model="input.wholeMsg"  style="height:100px" autofocus></textarea>
 		<div class="inputClear">
@@ -118,10 +120,14 @@
 		<div class="inputImgUpload">
 			<button class="btnImgUpload btn-no-outline fa fa-file-image-o" ng-click="btnImgUpload()"> Image</button>
 		</div>
+		<div class="inputEmoji">
+			<button class="btnEmoji btn-no-outline fa fa-smile-o" id="trigger"> Emoji</button>
+		</div>
 		<div class="inputAsk">
 			<button class="btnAsk btn-no-outline fa fa-paper-plane" ng-click="addTodo()"> Ask</button>
 		</div>
 	</div><!-- /input-group -->
+	
 	
 	<div class="imgUpload" ng-show="imgUpload">
 		<span class="btn btn-success fileinput-button">
@@ -229,7 +235,7 @@
 						<strong ng-click="tagToMsg(todo.op)" class="commentName">{{todo.op}}</strong></small>
 					</h4>
 
-						<p ng-show="todo.linkedDesc" ng-bind-html="todo.linkedDesc | unsafe" style="padding:10px"></p>
+						<p ng-show="todo.linkedDesc" ng-bind-html="parse(todo.linkedDesc)|unsafe" style="padding:10px"></p>
 					
 						<span ng-show="todo.tags" ng-repeat="tag in todo.tags">
 						<div style="overflow:hidden; display:inline" >
@@ -352,13 +358,41 @@
 <script src="http://nervgh.github.io/js/es5-shim.min.js"></script>
 <script src="http://nervgh.github.io/js/es5-sham.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script src="js/angular-fire-upload/console-sham.min.js"></script>
-<script src="js/angular-fire-upload/angular-file-upload.min.js"></script>
-<script src="js/angular-fire-upload/directives.js"></script>
+<script src="js/angular-file-upload/console-sham.min.js"></script>
+<script src="js/angular-file-upload/angular-file-upload.min.js"></script>
+<script src="js/angular-file-upload/directives.js"></script>
 
+<!-- emoji picker -->
+<script type="text/javascript" src="js/jquery.emojipicker.js"></script>
+<script type="text/javascript" src="js/jquery.emojipicker.a.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(e) {
 
+      $('#new-todo').emojiPicker({
+        width: '300px',
+        height: '200px',
+        button: false
+      });
 
+      $('#trigger').click(function(e) {
+        e.preventDefault();
+        $('#new-todo').emojiPicker('toggle');
+      });
+
+      // keyup event is fired 
+      $(".emojiable-question, .emojiable-option").on("keyup", function () {	 
+	  //console.log("emoji added, input val() is: " + $(this).val());
+		var temp = $(this).val();	  
+		var appElement = document.querySelector('[ng-app=todomvc]');
+		var $scope = angular.element(appElement).scope();
+		$scope.$apply(function() {
+			$scope.input = {wholeMsg: temp};
+		});
+      });
+    });
+</script>
+  
 
 </body>
 </html>

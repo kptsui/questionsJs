@@ -13,10 +13,15 @@
 	bottom:1px; 
 	right:0px;
 }
-.inputImgUpload{
+.inputEmoji{
 	position:absolute; 
 	bottom:1px; 
 	right:150px;
+}
+.inputImgUpload{
+	position:absolute; 
+	bottom:1px; 
+	right:250px;
 }
 .inputClear{
 	position:absolute;
@@ -39,6 +44,13 @@
 	width: 150px; 
 	height:30px; 
 	background-color:#327AC0; 
+	color: #FFF; 
+	border:0;
+}
+.btnEmoji{ 
+	width: 100px; 
+	height:30px; 
+	background-color:#EB2F6B; 
 	color: #FFF; 
 	border:0;
 }
