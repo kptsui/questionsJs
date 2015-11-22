@@ -303,7 +303,7 @@
 				<div ng-show="todo.comments">
 					<hr>
 					<div class="container-fluid" style="word-wrap: break-word; padding:0 10px 0 20px" ng-repeat="comment in todo.comments" >
-						<p><strong class="commentName">{{ comment.name }}</strong> {{ comment.msg }}<br><small>{{ comment.dateString }}</small></p>
+						<p><strong class="commentName">{{ comment.name }}</strong> <span ng-bind-html="parse(comment.msg)|unsafe"></span><br><small>{{ comment.dateString }}</small></p>
 					</div>
 				</div>
 			</div>
