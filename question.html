@@ -295,7 +295,7 @@
 						<i class="fa fa-trash-o"> Del</i>
 						</button>
 				</div>
-					<div ng-show="isCommentShow" ng-init="form=forms[$index];">
+					<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 						<form novalidate role="form">
 							<div class="emoji-picker-container" ng-init="setEmoji()">
 								<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3" data-emojiable="true"></textarea>
@@ -349,18 +349,15 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
-
       $('#new-todo').emojiPicker({
         width: '300px',
         height: '200px',
         button: false
       });
-
       $('#trigger').click(function(e) {
         e.preventDefault();
         $('#new-todo').emojiPicker('toggle');
       });
-
       // keyup event is fired 
       $(".emojiable-question, .emojiable-option").on("keyup", function () {	 
 	  //console.log("input val() is: " + $(this).val());

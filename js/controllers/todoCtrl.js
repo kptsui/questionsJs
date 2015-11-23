@@ -366,30 +366,29 @@ $scope.addTodo = function () {
 	//var linkedDesc = Autolinker.link(desc, {newWindow: false, stripPrefix: false, truncate: 25});
 	
 	var linkedDesc = Autolinker.link( desc, {newWindow: false, stripPrefix: false, truncate: 25,
-		replaceFn : function( autolinker, match ) {
-			switch( match.getType() ) {
-				case 'url' :
-					//console.log( "url: ", match.getUrl() );
-					var link = match.getUrl();
-					var ext = link.substr(link.lastIndexOf('.') + 1);
-					if (youtube_parser(link)){
-						return false;
-					} else if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "bmp" || ext == "gif"){
-						return '<img class="imgFrame" src="'+link+'">';
-					}
-					else
-					{
-						return true;  // let Autolinker perform its normal anchor tag replacement
-					}
-			}
-		}
-	} );
+    replaceFn : function( autolinker, match ) {
+        switch( match.getType() ) {
+            case 'url' :
+                //console.log( "url: ", match.getUrl() );
+				var link = match.getUrl();
+				var ext = link.substr(link.lastIndexOf('.') + 1);
+				if (youtube_parser(link)){
+                    return false;
+                } else if (ext == "jpg" || ext == "png" || ext == "jpeg" || ext == "bmp" || ext == "gif"){
+					return '<img class="imgFrame" src="'+link+'">';
+				}
+				else
+				{
+                    return true;  // let Autolinker perform its normal anchor tag replacement
+                }
+        }
+    }
+} );
 	//****************************************
 	$scope.todos.$add({
 		wholeMsg: newTodo,
 		head: head,
 		headLastChar: head.slice(-1),
-		newQuestion: false,
 		desc: desc,
 		linkedDesc: linkedDesc,
 		completed: false,
