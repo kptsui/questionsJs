@@ -24,6 +24,7 @@
 	<!-- need this for comlted ones. TODO: can I do this in bootstrap -->
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/preload.css">
+	<link rel="stylesheet" href="startGuide/css/baguetteBox.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.a.css">
 	
@@ -83,6 +84,13 @@
 						<button ng-hide="$authData" type="button" class="btn btn-default navbar-btn"  ng-click="FBLogin()">Sign In FB</button>
 					</li>
 					-->
+					<pre ng-show="false"><code class="js">baguetteBox.run('.baguetteBoxOne');</code></pre>
+					<li>
+						<div class="baguetteBoxOne gallery">
+							<button class="btn btn-default navbar-btn"><a href="startGuide/img/instruction1.jpg" data-caption="Start Guide">Start Guide</a></button>
+							<a href="startGuide/img/instruction2.jpg"></a>
+						</div>
+					</li>
 					
 					<li>
 						<img ng-show="$authData" src="https://graph.facebook.com/{{$authData.facebook.id}}/picture/?type=square&return_ssl_resources=1" alt="{{name}}" />
@@ -384,7 +392,35 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/preload.js"></script>
-	
+
+<script src="startGuide/js/baguetteBox.js" async></script>
+<script src="startGuide/js/plugins.js" async></script>
+<!--[if lt IE 9]>
+<script>
+var oldIE = true;
+</script>
+<![endif]-->
+<script>
+window.onload = function() {
+    if(typeof oldIE === 'undefined' && Object.keys)
+        hljs.initHighlighting();
+
+    baguetteBox.run('.baguetteBoxOne');
+    baguetteBox.run('.baguetteBoxTwo');
+    baguetteBox.run('.baguetteBoxThree', {
+        animation: 'fadeIn'
+    });
+    baguetteBox.run('.baguetteBoxFour', {
+        buttons: false
+    });
+    baguetteBox.run('.baguetteBoxFive', {
+        captions: function(element) {
+            return element.getElementsByTagName('img')[0].alt;
+        }
+    });
+};
+</script>
+
 <!-- 2.2.2 -->
 <script src="js/lib/firebase.js"></script>
 <script src="js/lib/angular.min.js"></script>
