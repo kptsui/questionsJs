@@ -275,6 +275,20 @@ $scope.tagToMsg = function($tag) {
 	$scope.input = {wholeMsg: Msg};
 }
 
+$scope.hotTagToMsg = function(id) {
+	try{
+		var tag = "#" + $(id).text();
+		if ($scope.input.wholeMsg.trim())
+			var Msg = $scope.input.wholeMsg.trim() + " " +tag;
+		else
+			var Msg = tag;
+	}
+	catch(e){
+		var Msg = tag;
+	}
+	$scope.input = {wholeMsg: Msg};
+}
+
 $scope.imgToMsg = function($url) {
 	var url = '<img class="imgFrame" src="uploads/'+$url+'">';
 	try{

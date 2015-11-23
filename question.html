@@ -215,9 +215,9 @@
 	<label>Hot Tag: </label>
 	 search by tag or add tag
 	<br>
-			<button id="btnTag0" class="btnTag" style="background-color:#FF6666" ng-click="tagToMsg('#Assignment')">Exam</button>
-			<button id="btnTag1" class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg('#Final')">Assignment</button>
-			<button id="btnTag2" class="btnTag" style="background-color:#33CC33" ng-click="tagToMsg('#Mid-term')">Laboratory</button>
+			<button id="btnTag0" class="btnTag" style="background-color:#FF6666" ng-click="hotTagToMsg('#btnTag0')">Exam</button>
+			<button id="btnTag1" class="btnTag" style="background-color:#FFCC00" ng-click="hotTagToMsg('#btnTag1')">Assignment</button>
+			<button id="btnTag2" class="btnTag" style="background-color:#33CC33" ng-click="hotTagToMsg('#btnTag2')">Laboratory</button>
 			
 	</div>
 
@@ -343,6 +343,37 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+<!-- emoji picker -->
+<script type="text/javascript" src="js/jquery.emojipicker.js"></script>
+<script type="text/javascript" src="js/jquery.emojipicker.a.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+
+      $('#new-todo').emojiPicker({
+        width: '300px',
+        height: '200px',
+        button: false
+      });
+
+      $('#trigger').click(function(e) {
+        e.preventDefault();
+        $('#new-todo').emojiPicker('toggle');
+      });
+
+      // keyup event is fired 
+      $(".emojiable-question, .emojiable-option").on("keyup", function () {	 
+	  //console.log("input val() is: " + $(this).val());
+		var temp = $(this).val();	  
+		var appElement = document.querySelector('[ng-app=todomvc]');
+		var $scope = angular.element(appElement).scope();
+		$scope.$apply(function() {
+			$scope.input = {wholeMsg: temp};
+		});
+      });
+    });
+</script>
+
 <!-- Begin emoji-picker JavaScript -->
 <script src="emoji/js/nanoscroller.min.js"></script>
 <script src="emoji/js/tether.min.js"></script>
@@ -381,36 +412,7 @@
 <script src="js/angular-file-upload/angular-file-upload.min.js"></script>
 <script src="js/angular-file-upload/directives.js"></script>
 
-<!-- emoji picker -->
-<script type="text/javascript" src="js/jquery.emojipicker.js"></script>
-<script type="text/javascript" src="js/jquery.emojipicker.a.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function(e) {
-
-      $('#new-todo').emojiPicker({
-        width: '300px',
-        height: '200px',
-        button: false
-      });
-
-      $('#trigger').click(function(e) {
-        e.preventDefault();
-        $('#new-todo').emojiPicker('toggle');
-      });
-
-      // keyup event is fired 
-      $(".emojiable-question, .emojiable-option").on("keyup", function () {	 
-	  //console.log("input val() is: " + $(this).val());
-		var temp = $(this).val();	  
-		var appElement = document.querySelector('[ng-app=todomvc]');
-		var $scope = angular.element(appElement).scope();
-		$scope.$apply(function() {
-			$scope.input = {wholeMsg: temp};
-		});
-      });
-    });
-</script>
   
 
 </body>
