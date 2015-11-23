@@ -364,12 +364,7 @@
       // keyup event is fired 
       $(".emojiable-question, .emojiable-option").on("keyup", function () {	 
 	  //console.log("input val() is: " + $(this).val());
-		var temp = $(this).val();	  
-		var appElement = document.querySelector('[ng-app=todomvc]');
-		var $scope = angular.element(appElement).scope();
-		$scope.$apply(function() {
-			$scope.input = {wholeMsg: temp};
-		});
+		$('#new-todo').trigger('input');
       });
     });
 </script>
