@@ -117,7 +117,7 @@ function timeInterpreter(res_date){
 	if (res_date > now.getTime() - 60 * 1000) // 1 min
 	{
 		output = Math.round((now-res_date)/1000);
-		if (output == 0)
+		if (output <= 0)
 			output = "just posted";
 		else
 			output += " s ago";
