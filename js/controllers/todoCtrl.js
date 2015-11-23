@@ -27,6 +27,9 @@ function ($scope, $location, $firebaseArray, $sce, $localStorage, $window, FileU
 	$scope.comments = [];
 	$scope.forms = []; // for data binding, prevent input appears on all forms at the same time
 
+	$scope.frequentTag = ["Exam", "Assignment", "Laboratory"];
+	$scope.tagsList = [];
+	
 	var noFB = true;
 	
 	//$scope.master = {};
@@ -334,7 +337,7 @@ $scope.addTodo = function () {
 	var desc = firstAndLast[1];
 
 	var userName = $scope.userName;
-	newTodo = userName + " " + newTodo;
+	//newTodo = userName + " " + newTodo;
 	userName = userName?userName:'annoymous';
 	//****************************************
 	//****************************************
@@ -387,6 +390,89 @@ $scope.addTodo = function () {
 	// remove the posted question in the input
 	$scope.input.wholeMsg = '';
 };
+
+	$scope.setEmoji = function(){
+      $window.emojiPicker = new EmojiPicker({
+        emojiable_selector: '[data-emojiable=true]',
+        assetsPath: 'emoji/img/',
+        popupButtonClasses: 'fa fa-smile-o'
+      });
+      $window.emojiPicker.discover();
+	}
+	
+	echoRef.on("child_added", function(snapshot, prevChildKey) {
+		var question = snapshot.val();
+		var tags = question.tags;
+		
+		if(tags != null){
+			for(var i=0; i<tags.length; i++){
+				$scope.tagsList.push(tags[i]);
+			}
+		}
+		setFrequentTag();
+	});
+	
+	function setFrequentTag(){
+		var copyTagsList = [];
+		$scope.tagsList.forEach(function(tag){
+			copyTagsList.push(tag);
+		});
+        // find 3 frequent tags
+        for(var i=0; i<3; i++){
+			
+            var frequentStr = frequentString(copyTagsList);
+			
+            if(frequentStr != null){
+                $scope.frequentTag[i] = frequentStr;
+				
+				var index = copyTagsList.indexOf(frequentStr);
+				if (index > -1) {
+					copyTagsList.splice(index, numberOfString(frequentStr, copyTagsList));
+				}
+				$("#btnTag" + i).text(frequentStr);
+				console.log("#btnTag" + i + " : " + frequentStr);
+            }
+        }
+    }
+	
+	function frequentString(array){
+		if(array.length < 3)
+			return null;
+		
+		var amount = [];
+		var copyString = [];
+		for(var i=0; i < array.length; i++){
+			if( i==0 || copyString.indexOf(array[i]) == -1 ){
+				copyString.push(array[i]);
+				amount.push(1);
+			}
+			else{
+				var index = copyString.indexOf(array[i]);
+				amount[index]++;
+			}
+		}
+		var max = 2;
+		var position = null;
+		for(var i=0; i < amount.length; i++){
+			if(amount[i] > max){
+				max = amount[i];
+				position = i;
+			}
+		}
+		if(position != null)
+			return copyString[position];
+		else
+			return null;
+	}
+	
+	function numberOfString(frequentStr, copyTagsList){
+		var num = 0;
+		for(var i=0; i<copyTagsList.length; i++){
+			if( copyTagsList[i] == frequentStr )
+				num++;
+		}
+		return num;
+	}
 
 $scope.editTodo = function (todo) {
 	$scope.editedTodo = todo;

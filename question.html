@@ -14,7 +14,9 @@
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
 	<title>Question Room</title>
+	<!--
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	-->
 	<link href="css/questionroom.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -24,6 +26,8 @@
 	<link rel="stylesheet" href="css/preload.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.a.css">
+	
+	
 </head>
 
 <body ng-controller="TodoCtrl" id="TodoCtrl" class="body">
@@ -208,9 +212,9 @@
 	<label>Hot Tag: </label>
 	 search by tag or add tag
 	<br>
-			<button class="btnTag" style="background-color:#FF6666" ng-click="tagToMsg('#Assignment')"> Assignment</button>
-			<button class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg('#Final')"> Final</button>
-			<button class="btnTag" style="background-color:#33CC33" ng-click="tagToMsg('#Mid-term')"> Mid-term</button>
+			<button id="btnTag0" class="btnTag" style="background-color:#FF6666" ng-click="tagToMsg('#Assignment')">Exam</button>
+			<button id="btnTag1" class="btnTag" style="background-color:#FFCC00" ng-click="tagToMsg('#Final')">Assignment</button>
+			<button id="btnTag2" class="btnTag" style="background-color:#33CC33" ng-click="tagToMsg('#Mid-term')">Laboratory</button>
 			
 	</div>
 
@@ -290,8 +294,9 @@
 				</div>
 					<div ng-show="isCommentShow" ng-init="form=forms[$index]">
 						<form novalidate role="form">
-
-							<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3"></textarea>
+							<div class="emoji-picker-container" ng-init="setEmoji()">
+								<textarea type="text" ng-model="form.msg" placeholder="Comment" class="form-control input-sm" rows="3" data-emojiable="true"></textarea>
+							</div>
 
 							<input type="submit" ng-click="isCommentShow = addComment(form, todo); isViewShow = !isCommentShow;" class="btn btn-info " value="submit" />
 
@@ -334,6 +339,16 @@
 <script src="js/lib/Autolinker.min.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<!-- Begin emoji-picker JavaScript -->
+<script src="emoji/js/nanoscroller.min.js"></script>
+<script src="emoji/js/tether.min.js"></script>
+<script src="emoji/js/config.js"></script>
+<script src="emoji/js/util.js"></script>
+<script src="emoji/js/jquery.emojiarea.js"></script>
+<script src="emoji/js/emoji-picker.js"></script>
+<!-- End emoji-picker JavaScript -->
+
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/preload.js"></script>
@@ -358,6 +373,7 @@
 <script src="http://nervgh.github.io/js/es5-shim.min.js"></script>
 <script src="http://nervgh.github.io/js/es5-sham.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script>var jquery_1_8_3 = jQuery.noConflict();</script>
 <script src="js/angular-file-upload/console-sham.min.js"></script>
 <script src="js/angular-file-upload/angular-file-upload.min.js"></script>
 <script src="js/angular-file-upload/directives.js"></script>
