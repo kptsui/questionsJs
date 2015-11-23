@@ -290,7 +290,7 @@ $scope.hotTagToMsg = function(id) {
 }
 
 $scope.imgToMsg = function($url) {
-	var url = '<img class="imgFrame" src="uploads/'+$url+'">';
+	var url = 'http://52.88.196.231/chat/uploads/'+$url;
 	try{
 		if ($scope.input.wholeMsg.trim())
 			var Msg = $scope.input.wholeMsg.trim() + "\n" +url;
