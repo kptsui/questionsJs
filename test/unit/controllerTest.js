@@ -348,6 +348,16 @@ describe('TodoCtrl', function() {
         scope.tagToMsg(tag);
         expect(scope.input.wholeMsg).toBe("#123");
       });
+            it('tagToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:1111};
+        var tag = "#123";
+        scope.tagToMsg(tag);
+        expect(scope.input.wholeMsg).toBe("#123");
+      });
       it('changeOrder', function() {
         var crtl = controller ('TodoCtrl', {
           $scope:scope,
@@ -432,7 +442,149 @@ describe('TodoCtrl', function() {
         scope.addComment(form, todo);
         expect(scope.editedTodo).toBe(todo);
 
-      });              
+      });
+    it('markAll', function() {
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+      $firebaseArray: firebaseArray
+        });   
+    var todoText = [];
+    todoText.push({ "completed": false, "dateString": "Sat Sep 19 2015 22:41:51 GMT+0800 (China Standard Time)", "desc": "", "echo": 1, "head": "test", "headLastChar": "t", "linkedDesc": "", "new": false, "order": -1, "timestamp": 1442673711706, "trustedDesc": "", "wholeMsg": "", "$id": "-Jza2SbF6TLvuS9vq90t", "$priority": null, "tags": null, "$$hashKey": "object:6" });
+    todoText.push({ "completed": true, "dateString": "Sat Sep 19 2015 22:41:51 GMT+0800 (China Standard Time)", "desc": "", "echo": 1, "head": "test", "headLastChar": "t", "linkedDesc": "", "new": false, "order": -1, "timestamp": 1442673711706, "trustedDesc": "", "wholeMsg": "12345", "$id": "-Jza2SbF6TLvuS9vq90t", "$priority": null, "tags": null, "$$hashKey": "object:6" });
+    todoText.push({"completed": true,"dataString": 'Fri Sep 18 2015 23:46:02 GMT+0800 (China Standard Time)',"desc": 'This is david not sung',"echo": 0,"head": 'hello!',"headLastChar": '?', "linkedDesc": 'This is david not sung',"new": false,"order": '0',"timestamp": '1442591162593',"wholeMsg": '', "$id": "-Jza2SbF6TLvuS9vq90t", "$priority": null, "tags": null, "$$hashKey": "object:6"});
+    var ref = new Firebase("https://sizzling-fire-8382.firebaseio.com/all/questions/");
+    scope.todos = firebaseArray(ref);
+    scope.todos.push(todoText[0]);
+    scope.todos.push(todoText[1]);
+    scope.todos.push(todoText[2]);
+    scope.markAll(true);
+    expect(todoText[0].completed).toBe(true);
+    expect(todoText[1].completed).toBe(true);
+    expect(todoText[2].completed).toBe(true);
+    expect(scope.todos[0].completed).toBe(true);
+    expect(scope.todos[1].completed).toBe(true);
+    expect(scope.todos[2].completed).toBe(true);
+    scope.markAll(false);
+    expect(todoText[0].completed).toBe(false);
+    expect(todoText[1].completed).toBe(false);
+    expect(todoText[2].completed).toBe(false);
+    expect(scope.todos[0].completed).toBe(false);
+    expect(scope.todos[1].completed).toBe(false);
+    expect(scope.todos[2].completed).toBe(false);
+    });
+    it('autoScroll true', function() {
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $window: window
+        });
+    window.innerHeight = 100;
+    window.scrollY = 100;
+    spyOn(scope,"increaseMax");
+    window.document.body.scrollBottom = 1000;
+    var e = document.createEvent("UIEvents");
+    e.initUIEvent("scroll", true, true, window, 1);
+    window.document.body.dispatchEvent(e);
+    expect(scope.increaseMax).toHaveBeenCalled();
+      });
+    
+    it('autoScroll false', function() {
+        var ctrl = controller('TodoCtrl', {
+          $scope: scope,
+          $window: window
+        });
+    window.innerHeight = 10;
+    window.scrollY = -11;
+    spyOn(scope,"increaseMax");
+    window.document.body.scrollTop = 10;
+    var e = document.createEvent("UIEvents");
+    e.initUIEvent("scroll", true, true, window, 1);
+    window.document.body.dispatchEvent(e);
+    expect(scope.increaseMax).not.toHaveBeenCalled();
+      });
 
+      it('hotTagToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:"sample input"};
+        
+        var id = 100;
+      
+        scope.hotTagToMsg(id);
+        expect(scope.input.wholeMsg).toBe("sample input #");
+      });
+      it('hotTagToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:""};
+        
+        var id = 100;
+      
+        scope.hotTagToMsg(id);
+        expect(scope.input.wholeMsg).toBe("#");
+      });                    
+      it('hotTagToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:100};
+        
+        var id = 100;
+      
+        scope.hotTagToMsg(id);
+        expect(scope.input.wholeMsg).toBe("#");
+      });
+      it('imgToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:"hi"};
+        var tag = "123";
+        scope.imgToMsg(tag);
+        expect(scope.input.wholeMsg).toBe("hi"+"\n"+"http://52.88.196.231/chat/uploads/123");
+      });
+      it('imgToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:""};
+        var tag = "123";
+        scope.imgToMsg(tag);
+        expect(scope.input.wholeMsg).toBe("img upload"+"\n"+"http://52.88.196.231/chat/uploads/123");
+      });
+      it('imgToMsg', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+
+        scope.input = {wholeMsg:100};
+        var tag = "123";
+        scope.imgToMsg(tag);
+        expect(scope.input.wholeMsg).toBe("img upload"+"\n"+"http://52.88.196.231/chat/uploads/123");
+      });
+      it('btnImageUpload', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        scope.imgUpload = true;
+        scope.btnImgUpload();
+        expect(scope.imgUpload).toBe(false);
+
+      });
+      it('btnImgUpload', function() {
+        var crtl = controller ('TodoCtrl', {
+          $scope:scope,
+        });
+        scope.imgUpload = false;
+        scope.btnImgUpload();
+        expect(scope.imgUpload).toBe(true);
+
+      });                                 
     });
   });
