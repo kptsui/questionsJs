@@ -296,6 +296,16 @@ describe('TodoCtrl', function() {
         scope.FBLogout(abc[0]);
         expect(abc[0].isAdmin).toBe(false);
       });
+      it('FBLogout', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        scope.noFB = false;
+        var abc = [];
+        abc.push({"isAdmin": false});
+        scope.FBLogout(abc[0]);
+        expect(abc[0].isAdmin).toBe(false);
+      });
 
       it('increaseMax', function(){
         var crtl = controller ('TodoCtrl',{
@@ -585,6 +595,22 @@ describe('TodoCtrl', function() {
         scope.btnImgUpload();
         expect(scope.imgUpload).toBe(true);
 
-      });                                 
+      });
+      it('parse', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        var desc = false;
+        expect(scope.parse(desc)).toBe(false);
+      });
+      it('parse', function(){
+        var crtl = controller ('TodoCtrl',{
+          $scope:scope,
+        });
+        var desc = "test"
+        var result = scope.parse(desc);
+        expect(scope.parse(desc)).toBe(result);
+      });      
+                                            
     });
   });
