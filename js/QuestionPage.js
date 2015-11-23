@@ -10,8 +10,6 @@ $(document).ready(function(){
 		var hyperLink = baseLink+roomName;
 
 		var courseType = roomName.substring(0,4).toLowerCase();
-		if(courseType!="acct" && courseType!="comp" && courseType!="huma" && courseType!="chem" && courseType!="hlth")
-			courseType = "unknown";
 		var icon = '<img src="img/'+courseType+'.png" alt="course icon" class="rmBlock">';
 
 		var stringToAppend = '<a class="col-xs-12 roomItem" href="'+hyperLink+'" onclick="location.reload();">'+icon+roomName.toUpperCase()+'</a>';
