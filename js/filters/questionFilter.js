@@ -18,12 +18,12 @@ todomvc.filter('questionFilter', function () {
 
     angular.forEach(input, function (todo) {
       if (todo.timestamp > new Date().getTime() - 180000) { // 3min
-        todo.new = true;
+        todo.newQuestion = true;
 		todo.bgColor = '#9CE79C';
 		todo.textColor = '#000';
         newQuestions.push(todo);
       } else if (sortedCount++<=max){  // show top n only.
-        todo.new = false;
+        todo.newQuestion = false;
 		todo.bgColor = '#fff';
 		todo.textColor = '#000';
         sorted.push(todo);
