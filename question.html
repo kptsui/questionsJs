@@ -221,17 +221,17 @@
 			ng-init="isCommentShow=false; isViewShow=false;"
 			ng-repeat="todo in todos | filter:input | questionFilter:maxQuestion | orderBy:predicate"
 			ng-class="{completed: todo.completed, editing: todo == editedTodo}"
-			ng-style="{'background-color' : todo.bgColor , 'border' : thisIsMine(todo.op)}"
+			ng-style="{'background-color' : updateColor(todo) , 'border' : thisIsMine(todo.op)}"
 			>
 			<div class="questionBlock" style="word-wrap: break-word">
 				<div class="questionContent">
-					<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar" ng-style="{'color' : todo.textColor }">
+					<h4 class="list-group-item-heading" ng-switch on="todo.headLastChar" style="color: #000">
 						<span ng-class="{completed: todo.completed}"><strong>{{todo.head}}</strong></span>
 						
 						<!-- never to show, just need its variable for sorting-->
 						<span ng-show="false">{{todo.timestamp}}</span>
 						
-						<small class="stringTime">{{todo.dateString}} by 
+						<small class="stringTime" ><span ng-bind-html="getDateString(todo)|unsafe"></span>  by 
 						<strong ng-click="tagToMsg(todo.op)" class="commentName">{{todo.op}}</strong></small>
 					</h4>
 

@@ -160,7 +160,7 @@ $scope.$watchCollection('todos', function () {
 
 		// set time
 		//todo.dateString = new Date(todo.timestamp).toString();
-		todo.dateString = timeInterpreter(new Date(todo.timestamp));
+		//todo.dateString = timeInterpreter(new Date(todo.timestamp));
 		// set message
 		//todo.tags = todo.wholeMsg.match(/#\w+/g);
 
@@ -552,6 +552,18 @@ $scope.btnImgUpload = function () {
 		$scope.imgUpload = true;
 };
 
+$scope.updateColor = function (todo) {
+	  if (todo.timestamp > new Date().getTime() - 180000) { // 3min
+		return '#9CE79C';
+      } else{  // show top n only.
+		return '#fff';
+      }
+}
+
+$scope.getDateString = function (todo) {
+	return timeInterpreter(new Date(todo.timestamp));
+}
+
 $scope.parse = function(desc) {
 	if (desc)
 	{
@@ -639,10 +651,6 @@ angular.element($window).bind("scroll", function() {
         };
         uploader.onSuccessItem = function(fileItem, response, status, headers) {
             console.info('onSuccessItem', fileItem, response, status, headers);
-			
-			//$scope.item.file.name = response.filename;
-			//$scope.uploader = {filename: response.filename}; //this is bug
-			//console.log($scope.uploader);
         };
         uploader.onErrorItem = function(fileItem, response, status, headers) {
             console.info('onErrorItem', fileItem, response, status, headers);
