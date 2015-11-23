@@ -28,6 +28,8 @@
 	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.css">
 	<link rel="stylesheet" type="text/css" href="css/jquery.emojipicker.a.css">
 	
+	<link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+	
 	<!-- Begin emoji-picker Stylesheets -->
 	<link href="emoji/css/nanoscroller.css" rel="stylesheet">
 	<link href="emoji/css/emoji.css" rel="stylesheet">
@@ -370,12 +372,7 @@
       // keyup event is fired 
       $(".emojiable-question, .emojiable-option").on("keyup", function () {	 
 	  //console.log("input val() is: " + $(this).val());
-		var temp = $(this).val();	  
-		var appElement = document.querySelector('[ng-app=todomvc]');
-		var $scope = angular.element(appElement).scope();
-		$scope.$apply(function() {
-			$scope.input = {wholeMsg: temp};
-		});
+		$('#new-todo').trigger('input');
       });
     });
 </script>
